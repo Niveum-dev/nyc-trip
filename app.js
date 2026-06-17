@@ -438,7 +438,7 @@ function placeCard(p) {
   const card = el('div', { class: 'card place-card' });
   card.append(
     el('div', { class: 'place-top' },
-      el('div', {}, el('h3', {}, p.name), p.price ? el('span', { class: 'meta' }, p.price) : null),
+      el('div', {}, el('h3', {}, p.name), p.price ? el('span', { class: 'meta' }, t(p.price)) : null),
       p.when ? el('div', { class: 'place-when' }, t(p.when)) : null)
   );
   if (p.address) card.append(el('div', { class: 'kv' }, el('span', { class: 'k' }, t('Where')), el('span', { class: 'v' }, p.address)));

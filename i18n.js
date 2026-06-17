@@ -71,6 +71,7 @@ window.I18N_ES = {
   'June 20': '20 jun',
   'June 21': '21 jun',
   'Arrival, LIC, Times Square late night': 'Llegada, LIC, Times Square de noche',
+  'Summit day + NYC must-sees after 7 PM': 'Día de cumbre + imperdibles de NYC después de las 7 PM',
   'Summit day + Rockefeller walking tour after 7 PM': 'Día de cumbre + recorrido por Rockefeller después de las 7 PM',
   'Closing 11 AM, Group: Gapstow, You: food crawl': 'Cierre 11 AM, Grupo: Gapstow, Tú: ruta gastronómica',
   'Light morning, JFK by 4:55 PM': 'Mañana tranquila, JFK a las 4:55 PM',
@@ -97,6 +98,13 @@ window.I18N_ES = {
   'N/W to Times Square': 'N/W a Times Square',
   'Times Square lights (group)': 'Luces de Times Square (grupo)',
   'N/W back to LIC': 'N/W de regreso a LIC',
+  '7 train back to LIC': 'Tren 7 de regreso a LIC',
+  'TKTS Red Steps photo': 'Foto en las Escaleras Rojas de TKTS',
+  "Junior's Cheesecake (open late)": "Junior's Cheesecake (abierto hasta tarde)",
+  'Top of the Rock - sunset + skyline': 'Top of the Rock - atardecer + horizonte',
+  '5th Avenue walk south (group)': 'Caminata al sur por la 5ta Avenida (grupo)',
+  'Bryant Park': 'Bryant Park',
+  'Grand Central Terminal': 'Grand Central Terminal',
   'N/W to 49 St': 'N/W a la calle 49',
   'Rockefeller Center (group)': 'Rockefeller Center (grupo)',
   "St. Patrick's Cathedral (group)": 'Catedral de San Patricio (grupo)',
@@ -199,7 +207,7 @@ window.I18N_ES = {
   'N or W train toward Manhattan': 'Tren N o W hacia Manhattan',
   'Ride to 49 ST (~5 stops)': 'Viaja hasta la calle 49 (~5 paradas)',
   'Walk 3 min east to Rockefeller Center / 5th Ave': 'Camina 3 min al este hacia Rockefeller Center / 5ta Avenida',
-  'Return: walk to Times Square after the 5th Ave stroll, N/W back to LIC.': 'Regreso: camina a Times Square tras pasear por la 5ta Avenida, N/W de vuelta a LIC.',
+  'Return: end the night at Grand Central and take the 7 train straight back to LIC (Court Sq).': 'Regreso: termina la noche en Grand Central y toma el tren 7 directo de vuelta a LIC (Court Sq).',
   'Ride to 5 AV/59 ST (~4 stops)': 'Viaja hasta 5 AV/59 ST (~4 paradas)',
   "Walk 5 min into Central Park's SE corner to Gapstow Bridge": 'Camina 5 min hacia la esquina SE de Central Park hasta el puente Gapstow',
   '5 Av/59 St is closest to Gapstow, by the Plaza Hotel. Return: N/W back to 39 Av-Dutch Kills for bags.': '5 Av/59 St es la más cercana a Gapstow, junto al Plaza Hotel. Regreso: N/W de vuelta a 39 Av-Dutch Kills por las maletas.',
@@ -243,4 +251,26 @@ window.I18N_ES = {
   'Shares Thursday and Friday, does Gapstow Saturday morning, then continues to TRYP + food crawl Saturday and the full Sunday before departing.': 'Comparte jueves y viernes, visita Gapstow el sábado por la mañana y luego continúa a TRYP + ruta gastronómica el sábado y todo el domingo antes de salir.',
   'Sat Jun 20, ~7 PM from JFK': 'Sáb 20 jun, ~7 PM desde JFK',
   'Sun Jun 21, 7:25 PM from JFK': 'Dom 21 jun, 7:25 PM desde JFK',
+
+  /* ---- new Thursday + Friday additions ---- */
+  'Free': 'Gratis',
+  'Rockefeller Center + St. Patrick\'s': 'Rockefeller Center + San Patricio',
+  /* hours */
+  'Always open (public plaza)': 'Siempre abierto (plaza pública)',
+  'Open late (~till midnight)': 'Abierto hasta tarde (~hasta medianoche)',
+  '~9 AM - 12 AM, last elevator ~11 PM': '~9 AM - 12 AM, último ascensor ~11 PM',
+  '~7 AM - 10 PM (later in summer)': '~7 AM - 10 PM (más tarde en verano)',
+  '~5 AM - 2 AM daily': '~5 AM - 2 AM todos los días',
+  /* order */
+  'Original NY cheesecake; a slice to share': 'Cheesecake original de NY; una porción para compartir',
+  /* place notes */
+  'The glowing red glass staircase above the TKTS booth. Climb up for the iconic elevated photo over the Times Square lights. Free, right where you already are.': 'La escalinata de vidrio rojo iluminada sobre la taquilla TKTS. Sube para la foto elevada icónica sobre las luces de Times Square. Gratis, justo donde ya estás.',
+  "NYC's most famous cheesecake, a block off the square. Perfect sweet after the Joe's slice without leaving the area.": "El cheesecake más famoso de NYC, a una cuadra de la plaza. El dulce perfecto tras la porción de Joe's sin alejarte.",
+  'The best skyline view in NYC - the Empire State Building is IN the view. June sunset ~8:30 PM, so going at dusk catches golden hour into full city lights. Timed tickets - BOOK AHEAD, it sells out.': 'La mejor vista del horizonte de NYC: el Empire State aparece EN la vista. Atardecer de junio ~8:30 PM, así que ir al anochecer atrapa la hora dorada y las luces de la ciudad. Boletos con horario: RESERVA CON ANTICIPACIÓN, se agotan.',
+  'Leafy midtown oasis behind the NY Public Library (the famous stone lions out front). A nice breather on the walk down from 5th Ave toward Times Square.': 'Oasis verde de Midtown detrás de la Biblioteca Pública de NY (los famosos leones de piedra al frente). Un buen respiro en la caminata desde la 5ta Avenida hacia Times Square.',
+  'Breathtaking Beaux-Arts main hall with the turquoise celestial ceiling. Free and open late. Bonus: the 7 train from here runs straight back to LIC (Court Sq).': 'Imponente salón principal estilo Beaux-Arts con el techo celeste turquesa. Gratis y abierto hasta tarde. Extra: el tren 7 desde aquí va directo de vuelta a LIC (Court Sq).',
+  /* highlight notes */
+  "The single best NYC skyline view - and you're already standing at Rockefeller. The Empire State Building is in the shot. June sunset ~8:30 PM, so go at dusk. Book timed tickets ahead.": 'La mejor vista del horizonte de NYC, y ya estás parado en Rockefeller. El Empire State sale en la foto. Atardecer de junio ~8:30 PM, así que ve al anochecer. Reserva boletos con horario.',
+  "The plaza with Atlas & Prometheus, and St. Patrick's Cathedral across 5th Ave - free, stunning interior. All one easy walk.": 'La plaza con Atlas y Prometeo, y la Catedral de San Patricio cruzando la 5ta Avenida: gratis, interior impresionante. Todo en una sola caminata.',
+  'Free, open late, and the celestial-ceiling main hall is a true first-timer wow. The 7 train from here runs straight back to LIC.': 'Gratis, abierto hasta tarde, y el salón principal con techo celeste es un verdadero asombro para primerizos. El tren 7 desde aquí va directo de vuelta a LIC.',
 };
