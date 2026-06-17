@@ -329,6 +329,13 @@ main {
 .btn.btn-teal { background: var(--teal); }
 .btn.btn-teal:active { background: var(--teal-dark); }
 .btn.btn-ghost { background: #eef1f4; color: var(--navy); }
+.btn.btn-day {
+  background: linear-gradient(135deg, var(--teal) 0%, var(--navy) 100%);
+  width: 100%;
+  justify-content: center;
+  font-size: 14.5px;
+  margin-top: 4px;
+}
 
 /* ---------- Routes ---------- */
 .route-card .route-meta { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 10px; }

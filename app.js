@@ -62,6 +62,21 @@ function telUrl(phone) {
   return 'tel:' + String(phone).replace(/[^\d+]/g, '');
 }
 
+/* Build a multi-stop Google Maps route through an ordered list of places.
+   Uses lat,lng when available, else the URL-encoded address. */
+function dayRouteUrl(places) {
+  if (!places.length) return null;
+  const pt = (p) => (p.lat != null && p.lng != null) ? `${p.lat},${p.lng}` : enc(p.address || p.name || '');
+  const base = 'https://www.google.com/maps/dir/?api=1&travelmode=transit';
+  if (places.length === 1) return `${base}&destination=${pt(places[0])}`;
+  const origin = pt(places[0]);
+  const destination = pt(places[places.length - 1]);
+  const mid = places.slice(1, -1).map(pt); // api=1 supports up to 9 waypoints
+  let url = `${base}&origin=${origin}&destination=${destination}`;
+  if (mid.length) url += `&waypoints=${mid.join('|')}`;
+  return url;
+}
+
 /* Pick a sensible destination for a route's "Directions" button. */
 function routeDestination(route) {
   const title = (route.title || '').toLowerCase();
@@ -237,6 +252,20 @@ function renderSchedule() {
         el('span', { class: 'day-date' }, day.date || '')),
       day.theme && el('div', { class: 'day-theme' }, day.theme)
     );
+
+    // "Map all stops" — multi-stop Google Maps route through the day's places, in time order
+    const dayPlaces = items
+      .filter((it) => it.place_ref && data.places[it.place_ref])
+      .map((it) => data.places[it.place_ref]);
+    if (dayPlaces.length >= 2) {
+      card.append(el('div', { class: 'btn-row' },
+        el('a', {
+          class: 'btn btn-day',
+          href: dayRouteUrl(dayPlaces),
+          target: '_blank',
+          rel: 'noopener',
+        }, `🗺️ Map all ${dayPlaces.length} stops`)));
+    }
 
     // Summit block (only when present & relevant)
     if (day.summit && day.summit.length && dayApplies) {
