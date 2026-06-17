@@ -329,13 +329,26 @@ main {
 .btn.btn-teal { background: var(--teal); }
 .btn.btn-teal:active { background: var(--teal-dark); }
 .btn.btn-ghost { background: #eef1f4; color: var(--navy); }
-.btn.btn-day {
-  background: linear-gradient(135deg, var(--teal) 0%, var(--navy) 100%);
-  width: 100%;
-  justify-content: center;
-  font-size: 14.5px;
-  margin-top: 4px;
+/* ---------- Day legs (point-to-point train directions) ---------- */
+.day-legs { margin: 12px 0 2px; }
+.leg {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--ink);
+  background: #f3f9f9;
+  border: 1px solid #d7ebec;
+  border-radius: 10px;
+  padding: 11px 12px;
+  margin-bottom: 6px;
+  min-height: 46px;
 }
+.leg:active { background: #e6f3f4; }
+.leg-route { font-size: 13.5px; font-weight: 600; line-height: 1.3; }
+.leg-arrow { color: var(--teal-dark); font-weight: 800; }
+.leg-go { color: var(--teal-dark); font-weight: 700; font-size: 12.5px; white-space: nowrap; flex-shrink: 0; }
 
 /* ---------- Routes ---------- */
 .route-card .route-meta { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 10px; }

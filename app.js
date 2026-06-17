@@ -62,19 +62,14 @@ function telUrl(phone) {
   return 'tel:' + String(phone).replace(/[^\d+]/g, '');
 }
 
-/* Build a multi-stop Google Maps route through an ordered list of places.
+/* Google Maps transit directions for a single leg (place A -> place B).
+   Opening one shows the real trains + departure/arrival times for that segment.
    Uses lat,lng when available, else the URL-encoded address. */
-function dayRouteUrl(places) {
-  if (!places.length) return null;
-  const pt = (p) => (p.lat != null && p.lng != null) ? `${p.lat},${p.lng}` : enc(p.address || p.name || '');
-  const base = 'https://www.google.com/maps/dir/?api=1&travelmode=transit';
-  if (places.length === 1) return `${base}&destination=${pt(places[0])}`;
-  const origin = pt(places[0]);
-  const destination = pt(places[places.length - 1]);
-  const mid = places.slice(1, -1).map(pt); // api=1 supports up to 9 waypoints
-  let url = `${base}&origin=${origin}&destination=${destination}`;
-  if (mid.length) url += `&waypoints=${mid.join('|')}`;
-  return url;
+function legPoint(p) {
+  return (p.lat != null && p.lng != null) ? `${p.lat},${p.lng}` : enc(p.address || p.name || '');
+}
+function legDirectionsUrl(from, to) {
+  return `https://www.google.com/maps/dir/?api=1&origin=${legPoint(from)}&destination=${legPoint(to)}&travelmode=transit`;
 }
 
 /* Pick a sensible destination for a route's "Directions" button. */
@@ -253,18 +248,29 @@ function renderSchedule() {
       day.theme && el('div', { class: 'day-theme' }, day.theme)
     );
 
-    // "Map all stops" — multi-stop Google Maps route through the day's places, in time order
+    // Train directions between consecutive stops, in time order.
+    // Each leg is its own A->B transit link so Maps shows real train times.
     const dayPlaces = items
       .filter((it) => it.place_ref && data.places[it.place_ref])
       .map((it) => data.places[it.place_ref]);
     if (dayPlaces.length >= 2) {
-      card.append(el('div', { class: 'btn-row' },
-        el('a', {
-          class: 'btn btn-day',
-          href: dayRouteUrl(dayPlaces),
-          target: '_blank',
-          rel: 'noopener',
-        }, `🗺️ Map all ${dayPlaces.length} stops`)));
+      const legs = el('div', { class: 'day-legs' },
+        el('div', { class: 'subhead' }, '🚆 Train directions between stops'));
+      for (let i = 0; i < dayPlaces.length - 1; i++) {
+        const from = dayPlaces[i], to = dayPlaces[i + 1];
+        legs.append(
+          el('a', {
+            class: 'leg',
+            href: legDirectionsUrl(from, to),
+            target: '_blank',
+            rel: 'noopener',
+          },
+            el('span', { class: 'leg-route' },
+              from.name, el('span', { class: 'leg-arrow' }, ' → '), to.name),
+            el('span', { class: 'leg-go' }, 'Directions ›'))
+        );
+      }
+      card.append(legs);
     }
 
     // Summit block (only when present & relevant)
