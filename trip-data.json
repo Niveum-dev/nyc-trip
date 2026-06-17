@@ -235,17 +235,7 @@
           ]
         },
         {
-          "time": "8:00 PM",
-          "activity": "Top of the Rock - sunset + skyline",
-          "type": "sight",
-          "place_ref": "top_of_rock",
-          "groups": [
-            1,
-            2
-          ]
-        },
-        {
-          "time": "9:00 PM",
+          "time": "8:15 PM",
           "activity": "St. Patrick's Cathedral (group)",
           "type": "sight",
           "place_ref": "st_patricks",
@@ -255,7 +245,7 @@
           ]
         },
         {
-          "time": "9:20 PM",
+          "time": "8:35 PM",
           "activity": "5th Avenue walk south (group)",
           "type": "sight",
           "place_ref": "fifth_ave",
@@ -265,7 +255,7 @@
           ]
         },
         {
-          "time": "9:40 PM",
+          "time": "8:55 PM",
           "activity": "Bryant Park",
           "type": "sight",
           "place_ref": "bryant_park",
@@ -275,7 +265,7 @@
           ]
         },
         {
-          "time": "9:55 PM",
+          "time": "9:15 PM",
           "activity": "Grand Central Terminal",
           "type": "sight",
           "place_ref": "grand_central",
@@ -285,7 +275,7 @@
           ]
         },
         {
-          "time": "10:25 PM",
+          "time": "9:45 PM",
           "activity": "7 train back to LIC",
           "type": "transit",
           "groups": [
@@ -671,17 +661,6 @@
       "notes": "NYC's most famous cheesecake, a block off the square. Perfect sweet after the Joe's slice without leaving the area.",
       "when": "Thu late night"
     },
-    "top_of_rock": {
-      "name": "Top of the Rock",
-      "category": "sight",
-      "address": "30 Rockefeller Plaza, New York, NY 10112",
-      "lat": 40.7593,
-      "lng": -73.9789,
-      "hours": "~9 AM - 12 AM, last elevator ~11 PM",
-      "price": "$$$ (~$40)",
-      "notes": "The best skyline view in NYC - the Empire State Building is IN the view. June sunset ~8:30 PM, so going at dusk catches golden hour into full city lights. Timed tickets - BOOK AHEAD, it sells out.",
-      "when": "Fri night (group)"
-    },
     "bryant_park": {
       "name": "Bryant Park",
       "category": "sight",
@@ -856,15 +835,6 @@
       "sight": "Times Square",
       "when": "Thursday night",
       "note": "The #1 first-timer sight, best after dark. Already there for Joe's Pizza.",
-      "groups": [
-        1,
-        2
-      ]
-    },
-    {
-      "sight": "Top of the Rock",
-      "when": "Friday after 7 PM",
-      "note": "The single best NYC skyline view - and you're already standing at Rockefeller. The Empire State Building is in the shot. June sunset ~8:30 PM, so go at dusk. Book timed tickets ahead.",
       "groups": [
         1,
         2
