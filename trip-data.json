@@ -226,6 +226,16 @@
         },
         {
           "time": "7:45 PM",
+          "activity": "Radio City Music Hall (photo)",
+          "type": "sight",
+          "place_ref": "radio_city",
+          "groups": [
+            1,
+            2
+          ]
+        },
+        {
+          "time": "8:05 PM",
           "activity": "Rockefeller Center (group)",
           "type": "sight",
           "place_ref": "rockefeller",
@@ -235,7 +245,7 @@
           ]
         },
         {
-          "time": "8:15 PM",
+          "time": "8:30 PM",
           "activity": "St. Patrick's Cathedral (group)",
           "type": "sight",
           "place_ref": "st_patricks",
@@ -245,7 +255,7 @@
           ]
         },
         {
-          "time": "8:35 PM",
+          "time": "8:55 PM",
           "activity": "5th Avenue walk south (group)",
           "type": "sight",
           "place_ref": "fifth_ave",
@@ -255,7 +265,17 @@
           ]
         },
         {
-          "time": "8:55 PM",
+          "time": "9:20 PM",
+          "activity": "NYPL Lions",
+          "type": "sight",
+          "place_ref": "nypl_lions",
+          "groups": [
+            1,
+            2
+          ]
+        },
+        {
+          "time": "9:35 PM",
           "activity": "Bryant Park",
           "type": "sight",
           "place_ref": "bryant_park",
@@ -265,7 +285,7 @@
           ]
         },
         {
-          "time": "9:15 PM",
+          "time": "10:05 PM",
           "activity": "Grand Central Terminal",
           "type": "sight",
           "place_ref": "grand_central",
@@ -275,7 +295,17 @@
           ]
         },
         {
-          "time": "9:45 PM",
+          "time": "10:35 PM",
+          "activity": "Chrysler Building (photo)",
+          "type": "sight",
+          "place_ref": "chrysler",
+          "groups": [
+            1,
+            2
+          ]
+        },
+        {
+          "time": "11:00 PM",
           "activity": "7 train back to LIC",
           "type": "transit",
           "groups": [
@@ -679,6 +709,39 @@
       "hours": "~5 AM - 2 AM daily",
       "price": "Free",
       "notes": "Breathtaking Beaux-Arts main hall with the turquoise celestial ceiling. Free and open late. Bonus: the 7 train from here runs straight back to LIC (Court Sq).",
+      "when": "Fri night (group)"
+    },
+    "radio_city": {
+      "name": "Radio City Music Hall",
+      "category": "sight",
+      "address": "1260 6th Ave, New York, NY 10020",
+      "lat": 40.7599,
+      "lng": -73.9799,
+      "hours": "Exterior anytime; marquee lit at night",
+      "price": "Free (to see)",
+      "notes": "The legendary Art Deco theater, home of the Rockettes. The neon marquee on 6th Ave is a classic NYC photo - right next to Rockefeller, so it's your first stop.",
+      "when": "Fri night (group)"
+    },
+    "nypl_lions": {
+      "name": "NYPL Lions (Patience & Fortitude)",
+      "category": "sight",
+      "address": "476 5th Ave, New York, NY 10018",
+      "lat": 40.7532,
+      "lng": -73.9822,
+      "hours": "Steps & lions anytime (building closes evenings)",
+      "price": "Free",
+      "notes": "The marble lions on the 5th Ave steps of the New York Public Library, lit up at night. Iconic photo - and Bryant Park is right behind the building.",
+      "when": "Fri night (group)"
+    },
+    "chrysler": {
+      "name": "Chrysler Building",
+      "category": "sight",
+      "address": "405 Lexington Ave, New York, NY 10174",
+      "lat": 40.7516,
+      "lng": -73.9755,
+      "hours": "Exterior anytime; crown lit at night",
+      "price": "Free (to see)",
+      "notes": "The Art Deco crown lit up at night is the best skyscraper view in the city. One block east of Grand Central - the perfect last shot before the 7 train home.",
       "when": "Fri night (group)"
     }
   },
