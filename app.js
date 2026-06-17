@@ -22,6 +22,31 @@ const enc = encodeURIComponent;
 
 const TYPE_LABELS = { food: 'Food', sight: 'Sight', transit: 'Transit', hotel: 'Hotel', summit: 'Summit' };
 
+/* ---------- Group state ---------- */
+// view: 'all' | 1 | 2
+let DATA = null;
+let VIEW = 'all';
+
+function parseView() {
+  const params = new URLSearchParams(location.search);
+  const g = params.get('group');
+  if (g === '1') return 1;
+  if (g === '2') return 2;
+  return 'all';
+}
+// Does an entry (with .groups array) belong in the current view?
+function inView(entry) {
+  if (VIEW === 'all') return true;
+  const groups = entry && entry.groups;
+  if (!Array.isArray(groups)) return true; // no group tag = applies to everyone
+  return groups.includes(VIEW);
+}
+// Is this entry split (applies to only one group)? Used for badging in "Everyone" view.
+function isSplit(entry) {
+  const g = entry && entry.groups;
+  return Array.isArray(g) && g.length === 1;
+}
+
 /* ---------- Maps / link builders ---------- */
 function mapsSearchUrl(place) {
   if (place && place.lat != null && place.lng != null) {
@@ -38,15 +63,8 @@ function telUrl(phone) {
 }
 
 /* Pick a sensible destination for a route's "Directions" button. */
-function routeDestination(route, places) {
-  // Try to find a place referenced in the title; else use last step's address-ish text.
+function routeDestination(route) {
   const title = (route.title || '').toLowerCase();
-  for (const p of Object.values(places)) {
-    if (p.name && title.includes(p.name.toLowerCase().split(' ')[0]) && p.address) {
-      // weak match; prefer explicit below
-    }
-  }
-  // Heuristic by known keywords -> address
   const byKey = [
     ['jfk', 'JFK Airport Terminal 4, Queens, NY'],
     ['gapstow', 'Gapstow Bridge, Central Park, New York, NY'],
@@ -54,13 +72,13 @@ function routeDestination(route, places) {
     ['times', 'Times Square, New York, NY 10036'],
     ['tryp', 'TRYP by Wyndham, W 36th St, New York, NY'],
     ['levain', '167 W 74th St, New York, NY 10023'],
+    ['food crawl', '79 Chrystie St, New York, NY 10002'],
     ['holiday inn', 'Holiday Inn Express, Long Island City, NY'],
     ['lic', 'Court Sq, Long Island City, NY'],
   ];
   for (const [kw, addr] of byKey) {
     if (title.includes(kw)) return addr;
   }
-  // Fallback: last step text
   const steps = route.steps || [];
   return steps.length ? steps[steps.length - 1] : (route.title || 'New York, NY');
 }
@@ -70,11 +88,66 @@ function typePill(type) {
   return el('span', { class: `pill t-${type || 'transit'}` },
     el('span', { class: `dot d-${type || 'transit'}` }), label);
 }
+function groupPill(n) {
+  return el('span', { class: `pill grp grp-${n}` }, 'Group ' + n);
+}
+
+/* ---------- Group toggle + banner ---------- */
+function setView(next, push = true) {
+  VIEW = next;
+  // update URL
+  const url = new URL(location.href);
+  if (next === 'all') url.searchParams.delete('group');
+  else url.searchParams.set('group', String(next));
+  if (push) history.replaceState(null, '', url);
+  // re-render
+  render();
+  // reflect toggle state
+  document.querySelectorAll('.gtoggle button').forEach((b) => {
+    b.classList.toggle('active', b.dataset.view === String(next));
+  });
+}
+
+function renderToggle() {
+  const bar = $('#group-toggle');
+  bar.innerHTML = '';
+  const groups = DATA.groups || {};
+  const opts = [
+    { view: 'all', label: 'Everyone' },
+    { view: '1', label: groups['1'] ? 'Group 1' : 'Group 1' },
+    { view: '2', label: groups['2'] ? 'Group 2' : 'Group 2' },
+  ];
+  const wrap = el('div', { class: 'gtoggle' },
+    opts.map((o) =>
+      el('button', {
+        type: 'button',
+        'data-view': o.view,
+        class: String(VIEW) === o.view ? 'active' : '',
+        onclick: () => setView(o.view === 'all' ? 'all' : Number(o.view)),
+      }, o.label)));
+  bar.append(wrap);
+}
+
+function groupBanner() {
+  if (VIEW === 'all') return null;
+  const g = (DATA.groups || {})[String(VIEW)];
+  if (!g) return null;
+  return el('div', { class: `gbanner gbanner-${VIEW}` },
+    el('div', { class: 'gb-name' }, g.name || ('Group ' + VIEW)),
+    g.departure ? el('div', { class: 'gb-dep' }, '🛫 Departs: ' + g.departure) : null,
+    g.description ? el('div', { class: 'gb-desc' }, g.description) : null);
+}
 
 /* ---------- Renderers ---------- */
-function renderOverview(data) {
+function renderOverview() {
+  const data = DATA;
   const t = data.trip;
   const root = $('#overview');
+  root.innerHTML = '';
+
+  const banner = groupBanner();
+  if (banner) root.append(banner);
+
   root.append(
     el('div', { class: 'section-head' },
       el('span', { class: 'eyebrow' }, 'Your trip')),
@@ -86,7 +159,7 @@ function renderOverview(data) {
 
   // Flights
   const f = t.flights || {};
-  const flightCard = el('div', { class: 'card' },
+  root.append(el('div', { class: 'card' },
     el('h3', {}, '✈️ Flights'),
     el('div', { class: 'flight-grid' },
       f.arrival && el('div', { class: 'flight' },
@@ -99,13 +172,11 @@ function renderOverview(data) {
         el('div', { class: 'route' }, `${f.departure.from} → ${f.departure.to}`),
         el('div', { class: 'times' }, `${f.departure.depart} – ${f.departure.arrive}`),
         f.departure.aircraft && el('div', { class: 'times' }, f.departure.aircraft)))
-  );
-  root.append(flightCard);
+  ));
 
   // Hotels
-  const hotels = t.hotels || [];
   const hotelCard = el('div', { class: 'card' }, el('h3', {}, '🏨 Hotels'));
-  hotels.forEach((h) => {
+  (t.hotels || []).forEach((h) => {
     hotelCard.append(
       el('div', { class: 'kv' }, el('span', { class: 'k' }, h.nights || ''),
         el('span', { class: 'v' },
@@ -117,7 +188,7 @@ function renderOverview(data) {
   // Summit venue
   const s = t.summit;
   if (s) {
-    const summitCard = el('div', { class: 'card' },
+    root.append(el('div', { class: 'card' },
       el('h3', {}, '🎤 ' + (s.name || 'Summit')),
       el('div', { class: 'meta' }, el('strong', {}, s.venue || ''), s.address ? ' · ' + s.address : ''),
       s.nearest_stations && s.nearest_stations.length
@@ -126,8 +197,7 @@ function renderOverview(data) {
       el('div', { class: 'btn-row' },
         s.address && el('a', { class: 'btn btn-teal', href: mapsSearchUrl({ address: s.address }), target: '_blank', rel: 'noopener' }, '📍 Open in Maps'),
         s.phone && el('a', { class: 'btn btn-ghost', href: telUrl(s.phone) }, '📞 ' + s.phone))
-    );
-    root.append(summitCard);
+    ));
   }
 
   // Payment notes
@@ -140,13 +210,22 @@ function renderOverview(data) {
   }
 }
 
-function renderSchedule(data) {
+function renderSchedule() {
+  const data = DATA;
   const root = $('#schedule');
+  root.innerHTML = '';
   root.append(el('div', { class: 'section-head' },
     el('span', { class: 'eyebrow' }, 'Itinerary'),
     el('h2', {}, 'Day by Day')));
 
   (data.schedule || []).forEach((day) => {
+    const items = (day.items || []).filter(inView);
+    // In single-group view, hide a day entirely if it has no items for this group
+    // (keep summit-only days only if summit exists AND group present that day).
+    const dayGroups = day.groups_present;
+    const dayApplies = VIEW === 'all' || !Array.isArray(dayGroups) || dayGroups.includes(VIEW);
+    if (VIEW !== 'all' && !items.length && !(day.summit && day.summit.length && dayApplies)) return;
+
     const dayId = 'day-' + (day.day || '').toLowerCase();
     const card = el('div', { class: 'card day-card', id: dayId, 'data-date': day.date || '' });
 
@@ -159,28 +238,30 @@ function renderSchedule(data) {
       day.theme && el('div', { class: 'day-theme' }, day.theme)
     );
 
-    // Summit block
-    if (day.summit && day.summit.length) {
-      const sb = el('div', {},
+    // Summit block (only when present & relevant)
+    if (day.summit && day.summit.length && dayApplies) {
+      card.append(
         el('div', { class: 'subhead' }, 'Summit schedule'),
         el('div', { class: 'summit-block' },
           day.summit.map((row) =>
             el('div', { class: 'summit-row' },
               el('span', { class: 'st' }, row.time || ''),
-              el('span', {}, row.label || '')))));
-      card.append(sb);
+              el('span', {}, row.label || ''))))
+      );
     }
 
-    // Personal itinerary
-    if (day.items && day.items.length) {
+    // Personal itinerary (filtered)
+    if (items.length) {
       card.append(el('div', { class: 'subhead' }, 'Itinerary'));
       const tl = el('ul', { class: 'timeline' });
-      day.items.forEach((item) => {
+      items.forEach((item) => {
         const place = item.place_ref ? data.places[item.place_ref] : null;
         const route = item.route_ref ? data.routes[item.route_ref] : null;
         const type = item.type || 'transit';
 
         const tags = el('div', { class: 'tl-tags' }, typePill(type));
+        // In "Everyone" view, badge split items so it's clear who does what.
+        if (VIEW === 'all' && isSplit(item)) tags.append(groupPill(item.groups[0]));
 
         let link = null;
         if (place) {
@@ -190,7 +271,7 @@ function renderSchedule(data) {
         }
 
         tl.append(
-          el('li', { class: 'tl-item' },
+          el('li', { class: 'tl-item' + (VIEW === 'all' && isSplit(item) ? ' tl-split g' + item.groups[0] : '') },
             el('div', { class: 'tl-time' }, item.time || ''),
             el('div', { class: 'tl-rail' }, el('span', { class: `dot d-${type}` })),
             el('div', { class: 'tl-body' },
@@ -207,28 +288,43 @@ function renderSchedule(data) {
   });
 }
 
-function renderPlaces(data) {
+function renderPlaces() {
+  const data = DATA;
   const root = $('#places');
+  root.innerHTML = '';
   root.append(el('div', { class: 'section-head' },
-    el('span', { class: 'eyebrow' }, 'Where to go' ),
+    el('span', { class: 'eyebrow' }, 'Where to go'),
     el('h2', {}, 'Places')));
 
-  const entries = Object.entries(data.places || {});
+  // Which places are referenced by items in the current view?
+  let visiblePlaceKeys = null;
+  if (VIEW !== 'all') {
+    visiblePlaceKeys = new Set();
+    (data.schedule || []).forEach((day) =>
+      (day.items || []).filter(inView).forEach((it) => {
+        if (it.place_ref) visiblePlaceKeys.add(it.place_ref);
+      }));
+  }
+
   const groups = {
     food: { title: '🍜 Food', items: [] },
     sight: { title: '🏙️ Sights', items: [] },
   };
-  entries.forEach(([key, p]) => {
+  Object.entries(data.places || {}).forEach(([key, p]) => {
+    if (visiblePlaceKeys && !visiblePlaceKeys.has(key)) return;
     const cat = p.category === 'sight' ? 'sight' : 'food';
     groups[cat].items.push(p);
   });
 
+  let any = false;
   Object.values(groups).forEach((group) => {
     if (!group.items.length) return;
+    any = true;
     root.append(el('div', { class: 'cat-title' }, group.title,
       el('span', { class: 'tl-sub', style: 'font-weight:600' }, `(${group.items.length})`)));
     group.items.forEach((p) => root.append(placeCard(p)));
   });
+  if (!any) root.append(el('div', { class: 'tl-sub', style: 'padding:8px 2px' }, 'No places for this group view.'));
 }
 
 function placeCard(p) {
@@ -242,7 +338,6 @@ function placeCard(p) {
   if (p.hours) card.append(el('div', { class: 'kv' }, el('span', { class: 'k' }, 'Hours'), el('span', { class: 'v' }, p.hours)));
   if (p.order) card.append(el('div', { class: 'place-order' }, el('b', {}, 'Order: '), p.order));
   if (p.notes) card.append(el('div', { class: 'place-notes' }, p.notes));
-
   card.append(
     el('div', { class: 'btn-row' },
       el('a', { class: 'btn btn-teal', href: mapsSearchUrl(p), target: '_blank', rel: 'noopener' }, '📍 Open in Maps'),
@@ -251,16 +346,23 @@ function placeCard(p) {
   return card;
 }
 
-function renderRoutes(data) {
+function renderRoutes() {
+  const data = DATA;
   const root = $('#routes');
+  root.innerHTML = '';
   root.append(el('div', { class: 'section-head' },
     el('span', { class: 'eyebrow' }, 'Getting around'),
     el('h2', {}, 'Train Routes')));
 
+  let any = false;
   Object.entries(data.routes || {}).forEach(([key, r]) => {
-    const dest = routeDestination(r, data.places || {});
+    if (!inView(r)) return;
+    any = true;
+    const dest = routeDestination(r);
+    const titleRow = el('h3', {}, '🚇 ' + (r.title || key));
     const card = el('div', { class: 'card route-card', id: 'route-' + key, style: 'scroll-margin-top:80px' },
-      el('h3', {}, '🚇 ' + (r.title || key)),
+      titleRow,
+      VIEW === 'all' && isSplit(r) ? el('div', { style: 'margin:2px 0 4px' }, groupPill(r.groups[0])) : null,
       el('div', { class: 'route-meta' },
         r.when && el('span', { class: 'chip' }, '🕑 ' + r.when),
         r.cost && el('span', { class: 'chip' }, '💵 ' + r.cost),
@@ -272,11 +374,14 @@ function renderRoutes(data) {
     );
     root.append(card);
   });
+  if (!any) root.append(el('div', { class: 'tl-sub', style: 'padding:8px 2px' }, 'No routes for this group view.'));
 }
 
-function renderHighlights(data) {
+function renderHighlights() {
+  const data = DATA;
   const root = $('#highlights');
-  const list = data.group_highlights || [];
+  root.innerHTML = '';
+  const list = (data.group_highlights || []).filter(inView);
   if (!list.length) return;
   root.append(el('div', { class: 'section-head' },
     el('span', { class: 'eyebrow' }, 'First-timer must-sees'),
@@ -298,7 +403,7 @@ function renderHighlights(data) {
 function setupNav() {
   const links = Array.from(document.querySelectorAll('.bottomnav a'));
   const sections = links.map((a) => document.getElementById(a.dataset.nav)).filter(Boolean);
-
+  if (window.__spy) window.__spy.disconnect();
   const spy = new IntersectionObserver((entries) => {
     entries.forEach((e) => {
       if (e.isIntersecting) {
@@ -308,52 +413,57 @@ function setupNav() {
     });
   }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
   sections.forEach((s) => spy.observe(s));
+  window.__spy = spy;
 }
 
-function setupToday(data) {
-  const btn = $('#today-btn');
+function setupToday() {
+  const data = DATA;
   const days = data.schedule || [];
-
-  // Build date -> element map. Trip is June 18-21, 2026.
   const monthMap = { january:0,february:1,march:2,april:3,may:4,june:5,july:6,august:7,september:8,october:9,november:10,december:11 };
   function parseTripDate(dateStr) {
-    // e.g. "June 18"
     const m = String(dateStr).trim().match(/([A-Za-z]+)\s+(\d+)/);
     if (!m) return null;
     const mon = monthMap[m[1].toLowerCase()];
     if (mon == null) return null;
     return new Date(2026, mon, parseInt(m[2], 10));
   }
-
-  function findTodayCard() {
-    const now = new Date();
-    const todayKey = now.getFullYear() * 10000 + now.getMonth() * 100 + now.getDate();
-    let best = null;
-    days.forEach((day) => {
-      const d = parseTripDate(day.date);
-      if (!d) return;
-      const key = d.getFullYear() * 10000 + d.getMonth() * 100 + d.getDate();
-      const card = document.getElementById('day-' + (day.day || '').toLowerCase());
-      if (!card) return;
-      if (key === todayKey) best = { card, exact: true };
-      // if no exact match yet, track the first upcoming day
-      if (!best && key >= todayKey) best = { card, exact: false };
-    });
-    // mark today's card
-    if (best && best.exact) best.card.classList.add('is-today');
-    return best ? best.card : (days.length ? document.getElementById('day-' + (days[0].day || '').toLowerCase()) : null);
+  const now = new Date();
+  const todayKey = now.getFullYear() * 10000 + now.getMonth() * 100 + now.getDate();
+  let exactCard = null, fallbackCard = null;
+  days.forEach((day) => {
+    const d = parseTripDate(day.date);
+    if (!d) return;
+    const key = d.getFullYear() * 10000 + d.getMonth() * 100 + d.getDate();
+    const card = document.getElementById('day-' + (day.day || '').toLowerCase());
+    if (!card) return;
+    if (key === todayKey) exactCard = card;
+    if (!fallbackCard && key >= todayKey) fallbackCard = card;
+  });
+  if (exactCard) {
+    exactCard.classList.add('is-today');
+    const head = exactCard.querySelector('.day-head > div');
+    if (head && !head.querySelector('.today-tag')) head.append(el('span', { class: 'today-tag', style: 'margin-left:8px' }, 'Today'));
   }
-
-  const todayCard = findTodayCard();
-  // Add a "Today" tag to the matching card header
-  const marked = document.querySelector('.day-card.is-today .day-head > div');
-  if (marked) marked.append(el('span', { class: 'today-tag', style: 'margin-left:8px' }, 'Today'));
-
-  btn.addEventListener('click', () => {
-    const target = document.querySelector('.day-card.is-today') || todayCard;
+  const target = exactCard || fallbackCard || (days.length ? document.getElementById('day-' + (days[0].day || '').toLowerCase()) : null);
+  const btn = $('#today-btn');
+  btn.onclick = () => {
     if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     else document.getElementById('schedule').scrollIntoView({ behavior: 'smooth' });
-  });
+  };
+}
+
+/* ---------- Render all ---------- */
+function render() {
+  document.body.classList.toggle('view-group', VIEW !== 'all');
+  document.body.setAttribute('data-view', String(VIEW));
+  renderToggle();
+  renderOverview();
+  renderSchedule();
+  renderPlaces();
+  renderRoutes();
+  renderHighlights();
+  setupNav();
+  setupToday();
 }
 
 /* ---------- Boot ---------- */
@@ -361,23 +471,20 @@ async function boot() {
   try {
     const res = await fetch('./trip-data.json', { cache: 'no-store' });
     if (!res.ok) throw new Error('HTTP ' + res.status);
-    const data = await res.json();
+    DATA = await res.json();
+    VIEW = parseView();
 
-    // brand
-    if (data.trip) {
-      if (data.trip.title) $('#brand-title').textContent = data.trip.title;
-      if (data.trip.dates) $('#brand-dates').textContent = data.trip.dates;
-      document.title = (data.trip.title || 'Trip') + ' · ' + (data.trip.dates || '');
+    if (DATA.trip) {
+      if (DATA.trip.title) $('#brand-title').textContent = DATA.trip.title;
+      if (DATA.trip.dates) $('#brand-dates').textContent = DATA.trip.dates;
+      document.title = (DATA.trip.title || 'Trip') + ' · ' + (DATA.trip.dates || '');
     }
 
     $('#loading').remove();
-    renderOverview(data);
-    renderSchedule(data);
-    renderPlaces(data);
-    renderRoutes(data);
-    renderHighlights(data);
-    setupNav();
-    setupToday(data);
+    render();
+
+    // sync if user navigates back/forward
+    window.addEventListener('popstate', () => { VIEW = parseView(); render(); });
   } catch (err) {
     const loading = $('#loading');
     if (loading) {

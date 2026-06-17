@@ -17,12 +17,16 @@
   --c-hotel: #c9a227;
   --c-summit: #d6336c;
 
+  /* group accents */
+  --g1: #d2691e;
+  --g2: #6a4cc6;
+
   --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; scroll-padding-top: 74px; }
+html { scroll-behavior: smooth; scroll-padding-top: 122px; }
 
 body {
   margin: 0;
@@ -68,6 +72,65 @@ body {
   white-space: nowrap;
 }
 .today-btn:active { background: var(--teal-dark); }
+
+/* ---------- Group toggle ---------- */
+#group-toggle {
+  position: sticky;
+  top: calc(env(safe-area-inset-top, 0px) + 56px);
+  z-index: 45;
+  background: var(--bg);
+  padding: 10px 16px 8px;
+  border-bottom: 1px solid var(--line);
+}
+.gtoggle {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  gap: 6px;
+  background: #e8e4d9;
+  padding: 4px;
+  border-radius: 12px;
+}
+.gtoggle button {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--navy);
+  font-size: 13.5px;
+  font-weight: 700;
+  padding: 9px 6px;
+  border-radius: 9px;
+  cursor: pointer;
+  min-height: 40px;
+}
+.gtoggle button.active {
+  background: var(--navy);
+  color: #fff;
+  box-shadow: var(--shadow);
+}
+body[data-view="1"] .gtoggle button.active { background: var(--g1); }
+body[data-view="2"] .gtoggle button.active { background: var(--g2); }
+
+/* ---------- Group banner ---------- */
+.gbanner {
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin: 10px 0 14px;
+  color: #fff;
+}
+.gbanner-1 { background: linear-gradient(135deg, var(--g1) 0%, #b8651f 100%); }
+.gbanner-2 { background: linear-gradient(135deg, var(--g2) 0%, #5a3fb0 100%); }
+.gbanner .gb-name { font-size: 17px; font-weight: 800; }
+.gbanner .gb-dep { font-size: 13.5px; font-weight: 700; margin-top: 4px; opacity: 0.95; }
+.gbanner .gb-desc { font-size: 13px; margin-top: 6px; opacity: 0.92; line-height: 1.4; }
+
+/* ---------- Group pills / split rows ---------- */
+.pill.grp { color: #fff; }
+.pill.grp-1 { background: var(--g1); }
+.pill.grp-2 { background: var(--g2); }
+.tl-item.tl-split { border-left: 3px solid transparent; padding-left: 8px; margin-left: -8px; }
+.tl-item.tl-split.g1 { border-left-color: var(--g1); }
+.tl-item.tl-split.g2 { border-left-color: var(--g2); }
 
 /* ---------- Layout ---------- */
 main {

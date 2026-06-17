@@ -4,19 +4,44 @@
     "dates": "June 18-21, 2026",
     "travelers": "You + group (group present Thu, Fri after 7PM, Sat until departure)",
     "flights": {
-      "arrival": { "date": "Thu Jun 18", "from": "SJU", "to": "JFK Terminal 4", "depart": "7:05 AM", "arrive": "11:01 AM", "aircraft": "Airbus A321neo" },
-      "departure": { "date": "Sun Jun 21", "from": "JFK Terminal 4", "to": "SJU", "depart": "7:25 PM", "arrive": "11:43 PM", "aircraft": "Airbus A321neo" }
+      "arrival": {
+        "date": "Thu Jun 18",
+        "from": "SJU",
+        "to": "JFK Terminal 4",
+        "depart": "7:05 AM",
+        "arrive": "11:01 AM",
+        "aircraft": "Airbus A321neo"
+      },
+      "departure": {
+        "date": "Sun Jun 21",
+        "from": "JFK Terminal 4",
+        "to": "SJU",
+        "depart": "7:25 PM",
+        "arrive": "11:43 PM",
+        "aircraft": "Airbus A321neo"
+      }
     },
     "hotels": [
-      { "name": "Holiday Inn Express LIC", "nights": "Thu, Fri", "area": "Long Island City, near Court Sq" },
-      { "name": "TRYP by Wyndham Times Square South", "nights": "Sat", "area": "W 36th St, Midtown" }
+      {
+        "name": "Holiday Inn Express LIC",
+        "nights": "Thu, Fri",
+        "area": "Long Island City, near Court Sq"
+      },
+      {
+        "name": "TRYP by Wyndham Times Square South",
+        "nights": "Sat",
+        "area": "W 36th St, Midtown"
+      }
     ],
     "summit": {
       "name": "Empowered Summit: Llamado y Mobilized",
       "venue": "Melrose Ballroom",
       "address": "36-08 33rd St, Long Island City, NY 11106",
       "phone": "(718) 255-6921",
-      "nearest_stations": ["39 Av-Dutch Kills (N/W) ~5 min walk", "Queensboro Plaza (N/W/7) ~9 min walk"]
+      "nearest_stations": [
+        "39 Av-Dutch Kills (N/W) ~5 min walk",
+        "Queensboro Plaza (N/W/7) ~9 min walk"
+      ]
     },
     "payment_notes": [
       "OMNY only - tap the SAME contactless card or phone for every ride",
@@ -27,102 +52,559 @@
   },
   "schedule": [
     {
-      "day": "Thursday", "date": "June 18", "theme": "Arrival, LIC, Times Square late night",
+      "day": "Thursday",
+      "date": "June 18",
+      "theme": "Arrival, LIC, Times Square late night",
       "group_present": true,
       "summit": [
-        { "time": "2:00 PM", "label": "Official check-in" },
-        { "time": "4:00 PM", "label": "Welcome + prayer (Sr. Pastor)" },
-        { "time": "5:00 PM", "label": "Session 1 + workshops 6:15 & 7:15 PM" },
-        { "time": "8:30 PM", "label": "Ministry time" },
-        { "time": "9:15 PM", "label": "Closing" }
+        {
+          "time": "2:00 PM",
+          "label": "Official check-in"
+        },
+        {
+          "time": "4:00 PM",
+          "label": "Welcome + prayer (Sr. Pastor)"
+        },
+        {
+          "time": "5:00 PM",
+          "label": "Session 1 + workshops 6:15 & 7:15 PM"
+        },
+        {
+          "time": "8:30 PM",
+          "label": "Ministry time"
+        },
+        {
+          "time": "9:15 PM",
+          "label": "Closing"
+        }
       ],
       "items": [
-        { "time": "11:01 AM", "activity": "Land at JFK Terminal 4", "type": "transit", "route_ref": "jfk_to_lic" },
-        { "time": "12:40 PM", "activity": "Check in / drop bags at Holiday Inn LIC", "type": "hotel" },
-        { "time": "1:00 PM", "activity": "Lunch", "type": "food", "place_ref": "kyuramen" },
-        { "time": "2:00 PM", "activity": "Summit check-in at Melrose Ballroom", "type": "summit" },
-        { "time": "9:20 PM", "activity": "N/W to Times Square", "type": "transit", "route_ref": "melrose_to_timessq" },
-        { "time": "9:55 PM", "activity": "Joe's Pizza Broadway", "type": "food", "place_ref": "joes_pizza" },
-        { "time": "10:30 PM", "activity": "Times Square lights (group)", "type": "sight", "place_ref": "times_square" },
-        { "time": "11:15 PM", "activity": "N/W back to LIC", "type": "transit" }
+        {
+          "time": "11:01 AM",
+          "activity": "Land at JFK Terminal 4",
+          "type": "transit",
+          "route_ref": "jfk_to_lic",
+          "groups": [
+            1,
+            2
+          ]
+        },
+        {
+          "time": "12:40 PM",
+          "activity": "Check in / drop bags at Holiday Inn LIC",
+          "type": "hotel",
+          "groups": [
+            1,
+            2
+          ]
+        },
+        {
+          "time": "1:00 PM",
+          "activity": "Lunch",
+          "type": "food",
+          "place_ref": "kyuramen",
+          "groups": [
+            1,
+            2
+          ]
+        },
+        {
+          "time": "2:00 PM",
+          "activity": "Summit check-in at Melrose Ballroom",
+          "type": "summit",
+          "groups": [
+            1,
+            2
+          ]
+        },
+        {
+          "time": "9:20 PM",
+          "activity": "N/W to Times Square",
+          "type": "transit",
+          "route_ref": "melrose_to_timessq",
+          "groups": [
+            1,
+            2
+          ]
+        },
+        {
+          "time": "9:55 PM",
+          "activity": "Joe's Pizza Broadway",
+          "type": "food",
+          "place_ref": "joes_pizza",
+          "groups": [
+            1,
+            2
+          ]
+        },
+        {
+          "time": "10:30 PM",
+          "activity": "Times Square lights (group)",
+          "type": "sight",
+          "place_ref": "times_square",
+          "groups": [
+            1,
+            2
+          ]
+        },
+        {
+          "time": "11:15 PM",
+          "activity": "N/W back to LIC",
+          "type": "transit",
+          "groups": [
+            1,
+            2
+          ]
+        }
+      ],
+      "groups_present": [
+        1,
+        2
       ]
     },
     {
-      "day": "Friday", "date": "June 19", "theme": "Summit day + Rockefeller walking tour after 7 PM",
+      "day": "Friday",
+      "date": "June 19",
+      "theme": "Summit day + Rockefeller walking tour after 7 PM",
       "group_present": true,
       "summit": [
-        { "time": "5:50 AM", "label": "Empowered Run Club + Coffee House devotionals" },
-        { "time": "9:00 AM", "label": "Session 2 + workshops, immigration panel" },
-        { "time": "11:50 AM", "label": "Lunch" },
-        { "time": "12:35 PM", "label": "Round 4 workshops, Empowered Impact 2 PM" },
-        { "time": "5:25 PM", "label": "Session 3" },
-        { "time": "7:00 PM", "label": "Closing" }
+        {
+          "time": "5:50 AM",
+          "label": "Empowered Run Club + Coffee House devotionals"
+        },
+        {
+          "time": "9:00 AM",
+          "label": "Session 2 + workshops, immigration panel"
+        },
+        {
+          "time": "11:50 AM",
+          "label": "Lunch"
+        },
+        {
+          "time": "12:35 PM",
+          "label": "Round 4 workshops, Empowered Impact 2 PM"
+        },
+        {
+          "time": "5:25 PM",
+          "label": "Session 3"
+        },
+        {
+          "time": "7:00 PM",
+          "label": "Closing"
+        }
       ],
       "items": [
-        { "time": "7:15 PM", "activity": "N/W to 49 St", "type": "transit", "route_ref": "melrose_to_rockefeller" },
-        { "time": "7:45 PM", "activity": "Rockefeller Center (group)", "type": "sight", "place_ref": "rockefeller" },
-        { "time": "8:15 PM", "activity": "St. Patrick's Cathedral (group)", "type": "sight", "place_ref": "st_patricks" },
-        { "time": "8:45 PM", "activity": "5th Avenue walk (group)", "type": "sight", "place_ref": "fifth_ave" },
-        { "time": "9:45 PM", "activity": "N/W back to LIC", "type": "transit" }
+        {
+          "time": "7:15 PM",
+          "activity": "N/W to 49 St",
+          "type": "transit",
+          "route_ref": "melrose_to_rockefeller",
+          "groups": [
+            1,
+            2
+          ]
+        },
+        {
+          "time": "7:45 PM",
+          "activity": "Rockefeller Center (group)",
+          "type": "sight",
+          "place_ref": "rockefeller",
+          "groups": [
+            1,
+            2
+          ]
+        },
+        {
+          "time": "8:15 PM",
+          "activity": "St. Patrick's Cathedral (group)",
+          "type": "sight",
+          "place_ref": "st_patricks",
+          "groups": [
+            1,
+            2
+          ]
+        },
+        {
+          "time": "8:45 PM",
+          "activity": "5th Avenue walk (group)",
+          "type": "sight",
+          "place_ref": "fifth_ave",
+          "groups": [
+            1,
+            2
+          ]
+        },
+        {
+          "time": "9:45 PM",
+          "activity": "N/W back to LIC",
+          "type": "transit",
+          "groups": [
+            1,
+            2
+          ]
+        }
+      ],
+      "groups_present": [
+        1,
+        2
       ]
     },
     {
-      "day": "Saturday", "date": "June 20", "theme": "Closing 11 AM, Group: Gapstow, You: food crawl",
+      "day": "Saturday",
+      "date": "June 20",
+      "theme": "Closing 11 AM, Group: Gapstow, You: food crawl",
       "group_present": true,
       "summit": [
-        { "time": "8:30 AM", "label": "Doors open" },
-        { "time": "9:00 AM", "label": "Session 4, New Launches 2027 at 9:15" },
-        { "time": "11:00 AM", "label": "Instructions + Closing" }
+        {
+          "time": "8:30 AM",
+          "label": "Doors open"
+        },
+        {
+          "time": "9:00 AM",
+          "label": "Session 4, New Launches 2027 at 9:15"
+        },
+        {
+          "time": "11:00 AM",
+          "label": "Instructions + Closing"
+        }
       ],
       "items": [
-        { "time": "11:15 AM", "activity": "N/W to Gapstow Bridge (group)", "type": "transit", "route_ref": "melrose_to_gapstow" },
-        { "time": "11:45 AM", "activity": "Gapstow Bridge - relaxed 30 min (group)", "type": "sight", "place_ref": "gapstow" },
-        { "time": "12:30 PM", "activity": "N/W back to LIC", "type": "transit" },
-        { "time": "1:00 PM", "activity": "Group grabs bags at Holiday Inn LIC", "type": "hotel" },
-        { "time": "1:15 PM", "activity": "GROUP departs for JFK", "type": "transit", "route_ref": "lic_to_jfk_group" },
-        { "time": "1:30 PM", "activity": "YOU: grab bags, checkout", "type": "hotel" },
-        { "time": "2:00 PM", "activity": "Subway to TRYP, check in", "type": "transit", "route_ref": "lic_to_tryp" },
-        { "time": "3:30 PM", "activity": "H Mart Koreatown", "type": "food", "place_ref": "hmart" },
-        { "time": "4:30 PM", "activity": "B/D to Chinatown", "type": "transit", "route_ref": "food_crawl" },
-        { "time": "4:55 PM", "activity": "Wah Fung No.1 (closes 7 PM, CASH)", "type": "food", "place_ref": "wah_fung" },
-        { "time": "5:50 PM", "activity": "Walk to Katz's", "type": "food", "place_ref": "katz" },
-        { "time": "7:15 PM", "activity": "Back to TRYP", "type": "transit" }
+        {
+          "time": "11:15 AM",
+          "activity": "N/W to Gapstow Bridge (group)",
+          "type": "transit",
+          "route_ref": "melrose_to_gapstow",
+          "groups": [
+            1,
+            2
+          ]
+        },
+        {
+          "time": "11:45 AM",
+          "activity": "Gapstow Bridge - relaxed 30 min (group)",
+          "type": "sight",
+          "place_ref": "gapstow",
+          "groups": [
+            1,
+            2
+          ]
+        },
+        {
+          "time": "12:30 PM",
+          "activity": "N/W back to LIC",
+          "type": "transit",
+          "groups": [
+            1,
+            2
+          ]
+        },
+        {
+          "time": "1:00 PM",
+          "activity": "Group 1: grab bags at Holiday Inn LIC",
+          "type": "hotel",
+          "groups": [
+            1
+          ]
+        },
+        {
+          "time": "1:15 PM",
+          "activity": "Group 1 departs for JFK",
+          "type": "transit",
+          "route_ref": "lic_to_jfk_group",
+          "groups": [
+            1
+          ]
+        },
+        {
+          "time": "1:30 PM",
+          "activity": "Group 2: grab bags, checkout",
+          "type": "hotel",
+          "groups": [
+            2
+          ]
+        },
+        {
+          "time": "2:00 PM",
+          "activity": "Subway to TRYP, check in",
+          "type": "transit",
+          "route_ref": "lic_to_tryp",
+          "groups": [
+            2
+          ]
+        },
+        {
+          "time": "3:30 PM",
+          "activity": "H Mart Koreatown",
+          "type": "food",
+          "place_ref": "hmart",
+          "groups": [
+            2
+          ]
+        },
+        {
+          "time": "4:30 PM",
+          "activity": "B/D to Chinatown",
+          "type": "transit",
+          "route_ref": "food_crawl",
+          "groups": [
+            2
+          ]
+        },
+        {
+          "time": "4:55 PM",
+          "activity": "Wah Fung No.1 (closes 7 PM, CASH)",
+          "type": "food",
+          "place_ref": "wah_fung",
+          "groups": [
+            2
+          ]
+        },
+        {
+          "time": "5:50 PM",
+          "activity": "Walk to Katz's",
+          "type": "food",
+          "place_ref": "katz",
+          "groups": [
+            2
+          ]
+        },
+        {
+          "time": "7:15 PM",
+          "activity": "Back to TRYP",
+          "type": "transit",
+          "groups": [
+            2
+          ]
+        }
+      ],
+      "groups_present": [
+        1,
+        2
       ]
     },
     {
-      "day": "Sunday", "date": "June 21", "theme": "Light morning, JFK by 4:55 PM",
+      "day": "Sunday",
+      "date": "June 21",
+      "theme": "Light morning, JFK by 4:55 PM",
       "group_present": false,
       "summit": [],
       "items": [
-        { "time": "10:00 AM", "activity": "Levain Bakery UWS", "type": "food", "place_ref": "levain", "route_ref": "levain_run" },
-        { "time": "12:00 PM", "activity": "Ichiran Times Square", "type": "food", "place_ref": "ichiran" },
-        { "time": "1:00 PM", "activity": "Glace Rockefeller", "type": "food", "place_ref": "glace" },
-        { "time": "1:45 PM", "activity": "Pack up at TRYP", "type": "hotel" },
-        { "time": "3:30 PM", "activity": "LIRR to JFK", "type": "transit", "route_ref": "tryp_to_jfk" },
-        { "time": "4:55 PM", "activity": "JFK Terminal 4", "type": "transit" },
-        { "time": "7:25 PM", "activity": "Flight to SJU", "type": "transit" }
+        {
+          "time": "10:00 AM",
+          "activity": "Levain Bakery UWS",
+          "type": "food",
+          "place_ref": "levain",
+          "route_ref": "levain_run",
+          "groups": [
+            2
+          ]
+        },
+        {
+          "time": "12:00 PM",
+          "activity": "Ichiran Times Square",
+          "type": "food",
+          "place_ref": "ichiran",
+          "groups": [
+            2
+          ]
+        },
+        {
+          "time": "1:00 PM",
+          "activity": "Glace Rockefeller",
+          "type": "food",
+          "place_ref": "glace",
+          "groups": [
+            2
+          ]
+        },
+        {
+          "time": "1:45 PM",
+          "activity": "Pack up at TRYP",
+          "type": "hotel",
+          "groups": [
+            2
+          ]
+        },
+        {
+          "time": "3:30 PM",
+          "activity": "LIRR to JFK",
+          "type": "transit",
+          "route_ref": "tryp_to_jfk",
+          "groups": [
+            2
+          ]
+        },
+        {
+          "time": "4:55 PM",
+          "activity": "JFK Terminal 4",
+          "type": "transit",
+          "groups": [
+            2
+          ]
+        },
+        {
+          "time": "7:25 PM",
+          "activity": "Flight to SJU",
+          "type": "transit",
+          "groups": [
+            2
+          ]
+        }
+      ],
+      "groups_present": [
+        2
       ]
     }
   ],
   "places": {
-    "kyuramen": { "name": "Kyuramen LIC", "category": "food", "address": "27-17 42nd Rd, Long Island City, NY 11101", "lat": 40.7459, "lng": -73.9498, "hours": "11 AM - 10 PM (Fri/Sat till 11 PM)", "price": "$$", "order": "Beef shoyu ramen, spicy pork ramen, yakitori", "notes": "Near hotel. Mon-Thu 11 AM-5 PM items HALF PRICE.", "when": "Thu lunch" },
-    "joes_pizza": { "name": "Joe's Pizza Broadway", "category": "food", "address": "1435 Broadway, New York, NY 10018", "lat": 40.7557, "lng": -73.9863, "hours": "10 AM - 4 AM Thu", "price": "$", "order": "Plain cheese or pepperoni slice, fold and walk", "notes": "Classic NYC slice in Times Square. $4-5. Cash or card.", "when": "Thu late night" },
-    "hmart": { "name": "H Mart Koreatown", "category": "food", "address": "38 W 32nd St, New York, NY 10001", "lat": 40.7479, "lng": -73.9869, "hours": "8 AM - 11 PM daily", "price": "$", "order": "Korean BBQ, bibimbap, tteokbokki, kimchi pancake", "notes": "Food court upstairs. Pay each vendor separately. 5 min from TRYP.", "when": "Sat early dinner" },
-    "wah_fung": { "name": "Wah Fung No.1 Fast Food", "category": "food", "address": "79 Chrystie St, New York, NY 10002", "lat": 40.7177, "lng": -73.9931, "hours": "Tue-Sun 9 AM - 7 PM (closed Mon)", "price": "$", "order": "Roast pork + duck over rice, $9.50", "notes": "CASH ONLY. CLOSES 7 PM - arrive by 6. Near Grand St (B/D).", "when": "Sat dinner" },
-    "katz": { "name": "Katz's Delicatessen", "category": "food", "address": "205 E Houston St, New York, NY 10002", "lat": 40.7223, "lng": -73.9874, "hours": "Sat 8 AM - 2:45 AM", "price": "$$", "order": "Pastrami on rye + mustard, pickles", "notes": "Tip the cutter cash for a taste. DON'T lose your ticket ($50).", "when": "Sat late dinner" },
-    "levain": { "name": "Levain Bakery", "category": "food", "address": "167 W 74th St, New York, NY 10023", "lat": 40.7799, "lng": -73.9803, "hours": "Sun 8 AM - 8 PM", "price": "$", "order": "Chocolate chip walnut cookie", "notes": "Hockey-puck cookies. 1 train to 72 St. Grab extras for the flight.", "when": "Sun morning" },
-    "ichiran": { "name": "Ichiran Times Square", "category": "food", "address": "152 W 49th St, New York, NY 10019", "lat": 40.7609, "lng": -73.9841, "hours": "Sun 10:30 AM - 10:30 PM", "price": "$$", "order": "Tonkotsu ramen, customize on the order sheet", "notes": "Solo-booth concept. 5 min from TRYP. ~$20-25/bowl.", "when": "Sun lunch" },
-    "glace": { "name": "Glace Rockefeller Center", "category": "food", "address": "30 Rockefeller Plaza, New York, NY 10112", "lat": 40.7587, "lng": -73.9787, "hours": "Check before going", "price": "$", "order": "Hot chocolate, toasted marshmallow cream", "notes": "Viral spot. ~$10. Skip if line is 40+ min.", "when": "Sun snack" },
-    "times_square": { "name": "Times Square", "category": "sight", "address": "Times Square, New York, NY 10036", "lat": 40.7580, "lng": -73.9855, "notes": "#1 first-timer sight, best after dark. Walk the pedestrian plazas 42nd-47th.", "when": "Thu night (group)" },
-    "rockefeller": { "name": "Rockefeller Center", "category": "sight", "address": "45 Rockefeller Plaza, New York, NY 10111", "lat": 40.7587, "lng": -73.9787, "notes": "Plaza with Atlas & Prometheus statues. N/W to 49 St, 3 min walk.", "when": "Fri night (group)" },
-    "st_patricks": { "name": "St. Patrick's Cathedral", "category": "sight", "address": "5th Ave, New York, NY 10022", "lat": 40.7585, "lng": -73.9759, "notes": "Across 5th Ave from Rockefeller. Free, stunning interior.", "when": "Fri night (group)" },
-    "fifth_ave": { "name": "5th Avenue", "category": "sight", "address": "5th Ave & E 50th St, New York, NY 10022", "lat": 40.7596, "lng": -73.9750, "notes": "Flagship stores, lights. Walk south toward Times Square.", "when": "Fri night (group)" },
-    "gapstow": { "name": "Gapstow Bridge", "category": "sight", "address": "Gapstow Bridge, Central Park, New York, NY 10019", "lat": 40.7669, "lng": -73.9738, "notes": "Postcard Central Park view - stone bridge over the Pond, Midtown skyline behind. N/W to 5 Av/59 St, 5 min walk. Best photo from south side looking north.", "when": "Sat midday (group)" }
+    "kyuramen": {
+      "name": "Kyuramen LIC",
+      "category": "food",
+      "address": "27-17 42nd Rd, Long Island City, NY 11101",
+      "lat": 40.7459,
+      "lng": -73.9498,
+      "hours": "11 AM - 10 PM (Fri/Sat till 11 PM)",
+      "price": "$$",
+      "order": "Beef shoyu ramen, spicy pork ramen, yakitori",
+      "notes": "Near hotel. Mon-Thu 11 AM-5 PM items HALF PRICE.",
+      "when": "Thu lunch"
+    },
+    "joes_pizza": {
+      "name": "Joe's Pizza Broadway",
+      "category": "food",
+      "address": "1435 Broadway, New York, NY 10018",
+      "lat": 40.7557,
+      "lng": -73.9863,
+      "hours": "10 AM - 4 AM Thu",
+      "price": "$",
+      "order": "Plain cheese or pepperoni slice, fold and walk",
+      "notes": "Classic NYC slice in Times Square. $4-5. Cash or card.",
+      "when": "Thu late night"
+    },
+    "hmart": {
+      "name": "H Mart Koreatown",
+      "category": "food",
+      "address": "38 W 32nd St, New York, NY 10001",
+      "lat": 40.7479,
+      "lng": -73.9869,
+      "hours": "8 AM - 11 PM daily",
+      "price": "$",
+      "order": "Korean BBQ, bibimbap, tteokbokki, kimchi pancake",
+      "notes": "Food court upstairs. Pay each vendor separately. 5 min from TRYP.",
+      "when": "Sat early dinner"
+    },
+    "wah_fung": {
+      "name": "Wah Fung No.1 Fast Food",
+      "category": "food",
+      "address": "79 Chrystie St, New York, NY 10002",
+      "lat": 40.7177,
+      "lng": -73.9931,
+      "hours": "Tue-Sun 9 AM - 7 PM (closed Mon)",
+      "price": "$",
+      "order": "Roast pork + duck over rice, $9.50",
+      "notes": "CASH ONLY. CLOSES 7 PM - arrive by 6. Near Grand St (B/D).",
+      "when": "Sat dinner"
+    },
+    "katz": {
+      "name": "Katz's Delicatessen",
+      "category": "food",
+      "address": "205 E Houston St, New York, NY 10002",
+      "lat": 40.7223,
+      "lng": -73.9874,
+      "hours": "Sat 8 AM - 2:45 AM",
+      "price": "$$",
+      "order": "Pastrami on rye + mustard, pickles",
+      "notes": "Tip the cutter cash for a taste. DON'T lose your ticket ($50).",
+      "when": "Sat late dinner"
+    },
+    "levain": {
+      "name": "Levain Bakery",
+      "category": "food",
+      "address": "167 W 74th St, New York, NY 10023",
+      "lat": 40.7799,
+      "lng": -73.9803,
+      "hours": "Sun 8 AM - 8 PM",
+      "price": "$",
+      "order": "Chocolate chip walnut cookie",
+      "notes": "Hockey-puck cookies. 1 train to 72 St. Grab extras for the flight.",
+      "when": "Sun morning"
+    },
+    "ichiran": {
+      "name": "Ichiran Times Square",
+      "category": "food",
+      "address": "152 W 49th St, New York, NY 10019",
+      "lat": 40.7609,
+      "lng": -73.9841,
+      "hours": "Sun 10:30 AM - 10:30 PM",
+      "price": "$$",
+      "order": "Tonkotsu ramen, customize on the order sheet",
+      "notes": "Solo-booth concept. 5 min from TRYP. ~$20-25/bowl.",
+      "when": "Sun lunch"
+    },
+    "glace": {
+      "name": "Glace Rockefeller Center",
+      "category": "food",
+      "address": "30 Rockefeller Plaza, New York, NY 10112",
+      "lat": 40.7587,
+      "lng": -73.9787,
+      "hours": "Check before going",
+      "price": "$",
+      "order": "Hot chocolate, toasted marshmallow cream",
+      "notes": "Viral spot. ~$10. Skip if line is 40+ min.",
+      "when": "Sun snack"
+    },
+    "times_square": {
+      "name": "Times Square",
+      "category": "sight",
+      "address": "Times Square, New York, NY 10036",
+      "lat": 40.758,
+      "lng": -73.9855,
+      "notes": "#1 first-timer sight, best after dark. Walk the pedestrian plazas 42nd-47th.",
+      "when": "Thu night (group)"
+    },
+    "rockefeller": {
+      "name": "Rockefeller Center",
+      "category": "sight",
+      "address": "45 Rockefeller Plaza, New York, NY 10111",
+      "lat": 40.7587,
+      "lng": -73.9787,
+      "notes": "Plaza with Atlas & Prometheus statues. N/W to 49 St, 3 min walk.",
+      "when": "Fri night (group)"
+    },
+    "st_patricks": {
+      "name": "St. Patrick's Cathedral",
+      "category": "sight",
+      "address": "5th Ave, New York, NY 10022",
+      "lat": 40.7585,
+      "lng": -73.9759,
+      "notes": "Across 5th Ave from Rockefeller. Free, stunning interior.",
+      "when": "Fri night (group)"
+    },
+    "fifth_ave": {
+      "name": "5th Avenue",
+      "category": "sight",
+      "address": "5th Ave & E 50th St, New York, NY 10022",
+      "lat": 40.7596,
+      "lng": -73.975,
+      "notes": "Flagship stores, lights. Walk south toward Times Square.",
+      "when": "Fri night (group)"
+    },
+    "gapstow": {
+      "name": "Gapstow Bridge",
+      "category": "sight",
+      "address": "Gapstow Bridge, Central Park, New York, NY 10019",
+      "lat": 40.7669,
+      "lng": -73.9738,
+      "notes": "Postcard Central Park view - stone bridge over the Pond, Midtown skyline behind. N/W to 5 Av/59 St, 5 min walk. Best photo from south side looking north.",
+      "when": "Sat midday (group)"
+    }
   },
   "routes": {
     "jfk_to_lic": {
       "title": "JFK to Holiday Inn LIC",
-      "when": "Thursday arrival", "cost": "~$11.75", "duration": "50 min",
+      "when": "Thursday arrival",
+      "cost": "~$11.75",
+      "duration": "50 min",
       "steps": [
         "After bags, follow AirTrain signs (upper level, any terminal)",
         "AirTrain toward JAMAICA STATION, tap card on exit ($8.75)",
@@ -130,96 +612,179 @@
         "E train toward Manhattan, tap card ($3)",
         "Ride to COURT SQ-23 ST (~25 min), walk to hotel"
       ],
-      "note": "The E is the only subway that reaches JFK's AirTrain at Jamaica."
+      "note": "The E is the only subway that reaches JFK's AirTrain at Jamaica.",
+      "groups": [
+        1,
+        2
+      ]
     },
     "melrose_to_timessq": {
       "title": "Melrose Ballroom to Times Square",
-      "when": "Thu night", "cost": "$3", "duration": "~18 min",
+      "when": "Thu night",
+      "cost": "$3",
+      "duration": "~18 min",
       "steps": [
         "Walk to 39 Av-Dutch Kills station (N/W), ~5 min",
         "N or W train toward Manhattan / Coney Island",
         "Ride to TIMES SQ-42 ST (~6 stops)",
         "Joe's Pizza is 1 block away at 1435 Broadway"
       ],
-      "note": "Return: N/W from Times Sq back to 39 Av-Dutch Kills (toward Astoria)."
+      "note": "Return: N/W from Times Sq back to 39 Av-Dutch Kills (toward Astoria).",
+      "groups": [
+        1,
+        2
+      ]
     },
     "melrose_to_rockefeller": {
       "title": "Melrose Ballroom to Rockefeller Center",
-      "when": "Fri night", "cost": "$3", "duration": "~18 min",
+      "when": "Fri night",
+      "cost": "$3",
+      "duration": "~18 min",
       "steps": [
         "Walk to 39 Av-Dutch Kills station (N/W), ~5 min",
         "N or W train toward Manhattan",
         "Ride to 49 ST (~5 stops)",
         "Walk 3 min east to Rockefeller Center / 5th Ave"
       ],
-      "note": "Return: walk to Times Square after the 5th Ave stroll, N/W back to LIC."
+      "note": "Return: walk to Times Square after the 5th Ave stroll, N/W back to LIC.",
+      "groups": [
+        1,
+        2
+      ]
     },
     "melrose_to_gapstow": {
       "title": "Melrose Ballroom to Gapstow Bridge",
-      "when": "Sat, group", "cost": "$3", "duration": "~16 min",
+      "when": "Sat, group",
+      "cost": "$3",
+      "duration": "~16 min",
       "steps": [
         "Walk to 39 Av-Dutch Kills station (N/W), ~5 min",
         "N or W train toward Manhattan",
         "Ride to 5 AV/59 ST (~4 stops)",
         "Walk 5 min into Central Park's SE corner to Gapstow Bridge"
       ],
-      "note": "5 Av/59 St is closest to Gapstow, by the Plaza Hotel. Return: N/W back to 39 Av-Dutch Kills for bags."
+      "note": "5 Av/59 St is closest to Gapstow, by the Plaza Hotel. Return: N/W back to 39 Av-Dutch Kills for bags.",
+      "groups": [
+        1,
+        2
+      ]
     },
     "lic_to_jfk_group": {
-      "title": "GROUP: LIC to JFK",
-      "when": "Sat afternoon", "cost": "~$11.75", "duration": "50 min",
+      "title": "GROUP 1: LIC to JFK (Saturday departure)",
+      "when": "Sat afternoon",
+      "cost": "~$11.75",
+      "duration": "50 min",
       "steps": [
         "From hotel, walk to Court Sq-23 St station",
         "E train toward Jamaica (toward Queens, NOT Manhattan)",
         "Ride to SUTPHIN BLVD-ARCHER AV-JFK (~20 min)",
         "Follow AirTrain signs, AirTrain to Terminal 4, tap ($8.75)"
       ],
-      "note": "Leaving LIC by 1:15 PM puts them at JFK ~2:30 PM. Lots of buffer for a 7 PM flight."
+      "note": "Leaving LIC by 1:15 PM puts them at JFK ~2:30 PM. Lots of buffer for a 7 PM flight.",
+      "groups": [
+        1
+      ]
     },
     "lic_to_tryp": {
       "title": "YOU: LIC to TRYP Times Square",
-      "when": "Sat", "cost": "$3", "duration": "~22 min",
+      "when": "Sat",
+      "cost": "$3",
+      "duration": "~22 min",
       "steps": [
         "From hotel, walk to Court Sq-23 St (E) or Queensboro Plaza (7)",
         "E to Times Sq area, or 7 train to Times Sq-42 St",
         "Walk to TRYP by Wyndham (W 36th St area)"
+      ],
+      "groups": [
+        2
       ]
     },
     "food_crawl": {
       "title": "Food crawl: TRYP to H Mart to Wah Fung to Katz's",
-      "when": "Sat evening", "cost": "$3 subway", "duration": "varies",
+      "when": "Sat evening",
+      "cost": "$3 subway",
+      "duration": "varies",
       "steps": [
         "TRYP to H Mart: walk 5 min to 38 W 32nd St",
         "H Mart to Wah Fung: B/D from 34 St-Herald Sq to GRAND ST (~6 stops)",
         "Walk 5 min to 79 Chrystie St (closes 7 PM, arrive by 6)",
         "Wah Fung to Katz's: walk 4 blocks to 205 E Houston St",
         "Katz's to TRYP: Uber (~$25) or F train 2 Av to 34 St-Herald Sq"
+      ],
+      "groups": [
+        2
       ]
     },
     "levain_run": {
       "title": "Sunday: Levain run (UWS)",
-      "when": "Sun morning", "cost": "$3 each way", "duration": "~20 min each way",
+      "when": "Sun morning",
+      "cost": "$3 each way",
+      "duration": "~20 min each way",
       "steps": [
         "TRYP to Levain: 1 train from Times Sq-42 St to 72 ST",
         "Walk to 167 W 74th St",
         "Return: 1 train 72 St to Times Sq-42 St, walk to Ichiran (W 49th)"
+      ],
+      "groups": [
+        2
       ]
     },
     "tryp_to_jfk": {
       "title": "TRYP to JFK",
-      "when": "Sunday departure", "cost": "~$13.75", "duration": "50 min",
+      "when": "Sunday departure",
+      "cost": "~$13.75",
+      "duration": "50 min",
       "steps": [
         "Walk to Penn Station (~5 min from TRYP)",
         "Buy LIRR ticket to JAMAICA at machine ($5.25 off-peak)",
         "Board train labeled 'Jamaica', ~18 min",
         "At Jamaica, follow AirTrain signs, AirTrain to Terminal 4, tap ($8.75)"
       ],
-      "note": "Backup: A/C/E or taxi. Uber from TRYP to JFK is $70-90 + tolls, 45-75 min."
+      "note": "Backup: A/C/E or taxi. Uber from TRYP to JFK is $70-90 + tolls, 45-75 min.",
+      "groups": [
+        2
+      ]
     }
   },
   "group_highlights": [
-    { "sight": "Times Square", "when": "Thursday night", "note": "The #1 first-timer sight, best after dark. Already there for Joe's Pizza." },
-    { "sight": "Rockefeller Center + 5th Ave", "when": "Friday after 7 PM", "note": "Plaza, Atlas & Prometheus, St. Patrick's Cathedral across the street, 5th Ave flagship stores. All free, one walk." },
-    { "sight": "Gapstow Bridge", "when": "Saturday midday", "note": "Postcard Central Park view. Quick 30 min via N/W to 5 Av/59 St, then group heads to JFK from the Queens side." }
-  ]
+    {
+      "sight": "Times Square",
+      "when": "Thursday night",
+      "note": "The #1 first-timer sight, best after dark. Already there for Joe's Pizza.",
+      "groups": [
+        1,
+        2
+      ]
+    },
+    {
+      "sight": "Rockefeller Center + 5th Ave",
+      "when": "Friday after 7 PM",
+      "note": "Plaza, Atlas & Prometheus, St. Patrick's Cathedral across the street, 5th Ave flagship stores. All free, one walk.",
+      "groups": [
+        1,
+        2
+      ]
+    },
+    {
+      "sight": "Gapstow Bridge",
+      "when": "Saturday midday",
+      "note": "Postcard Central Park view. Quick 30 min via N/W to 5 Av/59 St, then group heads to JFK from the Queens side.",
+      "groups": [
+        1,
+        2
+      ]
+    }
+  ],
+  "groups": {
+    "1": {
+      "name": "Group 1 (leaves Saturday)",
+      "description": "Shares Thursday and Friday, does Gapstow Bridge Saturday morning, then departs JFK Saturday evening.",
+      "departure": "Sat Jun 20, ~7 PM from JFK"
+    },
+    "2": {
+      "name": "Group 2 (stays through Sunday)",
+      "description": "Shares Thursday and Friday, does Gapstow Saturday morning, then continues to TRYP + food crawl Saturday and the full Sunday before departing.",
+      "departure": "Sun Jun 21, 7:25 PM from JFK"
+    }
+  }
 }
