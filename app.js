@@ -70,12 +70,76 @@ function telUrl(phone) {
   return 'tel:' + String(phone).replace(/[^\d+]/g, '');
 }
 
-/* Transit directions for a single leg (place A -> place B). */
+/* Transit directions for a single leg (point A -> point B). */
 function legPoint(p) {
-  return (p.lat != null && p.lng != null) ? `${p.lat},${p.lng}` : enc(p.address || p.name || '');
+  return (p.lat != null && p.lng != null) ? `${p.lat},${p.lng}` : enc(p.q || p.address || p.name || '');
 }
 function legDirectionsUrl(from, to) {
   return `https://www.google.com/maps/dir/?api=1&origin=${legPoint(from)}&destination=${legPoint(to)}&travelmode=transit`;
+}
+
+/* Named non-place location nodes (airport, hotels, summit venue) used to
+   build complete door-to-door leg chains alongside the food/sight places. */
+const NODES = {
+  jfk:     { key: 'jfk',     name: 'JFK Terminal 4',         q: 'JFK Airport Terminal 4, Queens, NY 11430' },
+  lic:     { key: 'lic',     name: 'Holiday Inn Express LIC', q: 'Holiday Inn Express Long Island City, 39-32 27th St, Long Island City, NY 11101' },
+  tryp:    { key: 'tryp',    name: 'TRYP by Wyndham',         q: 'TRYP by Wyndham Times Square South, 345 W 35th St, New York, NY 10001' },
+  melrose: { key: 'melrose', name: 'Melrose Ballroom',        q: 'Melrose Ballroom, 36-08 33rd St, Long Island City, NY 11106' },
+};
+// Where each route leg starts — used to seed the first stop of a chain
+// (e.g. the evening tours start at the summit; Sunday starts at TRYP).
+const ROUTE_ORIGIN = {
+  jfk_to_lic: NODES.jfk,
+  melrose_to_timessq: NODES.melrose,
+  melrose_to_rockefeller: NODES.melrose,
+  melrose_to_gapstow: NODES.melrose,
+  lic_to_jfk_group: NODES.lic,
+  lic_to_tryp: NODES.lic,
+  food_crawl: NODES.tryp,
+  levain_run: NODES.tryp,
+  tryp_to_jfk: NODES.tryp,
+};
+
+function placeNode(ref) {
+  const p = DATA.places[ref];
+  if (!p) return null;
+  return { key: 'place:' + ref, name: p.name, lat: p.lat, lng: p.lng, q: p.address };
+}
+// Resolve a physical location for a schedule item, or null for pure
+// movement steps (e.g. "N/W to Times Square") whose endpoint is the next stop.
+function nodeForItem(item) {
+  if (item.place_ref && DATA.places[item.place_ref]) return placeNode(item.place_ref);
+  const a = (item.activity || '').toLowerCase();
+  if (item.type === 'hotel' || a.includes('holiday inn')) return a.includes('tryp') ? NODES.tryp : NODES.lic;
+  if (item.type === 'summit' || a.includes('melrose')) return NODES.melrose;
+  if (a.includes('jfk')) return NODES.jfk;
+  if (a.includes('tryp')) return NODES.tryp;
+  if (a.includes('to lic') || a.includes('back to lic')) return NODES.lic;
+  return null;
+}
+function itemsForGroup(day, g) {
+  return (day.items || []).filter((it) => !Array.isArray(it.groups) || it.groups.includes(g));
+}
+// Ordered, de-duplicated list of stops for one group on one day.
+function buildChain(day, g) {
+  const its = itemsForGroup(day, g);
+  const nodes = [];
+  for (const it of its) {
+    const n = nodeForItem(it);
+    if (n && (!nodes.length || nodes[nodes.length - 1].key !== n.key)) nodes.push(n);
+  }
+  const firstRouted = its.find((it) => it.route_ref && ROUTE_ORIGIN[it.route_ref]);
+  if (firstRouted) {
+    const o = ROUTE_ORIGIN[firstRouted.route_ref];
+    if (nodes.length && nodes[0].key !== o.key) nodes.unshift(o);
+  }
+  return nodes;
+}
+function chainKey(nodes) { return nodes.map((n) => n.key).join('>'); }
+function legAnchor(from, to) {
+  return el('a', { class: 'leg', href: legDirectionsUrl(from, to), target: '_blank', rel: 'noopener' },
+    el('span', { class: 'leg-route' }, t(from.name), el('span', { class: 'leg-arrow' }, ' → '), t(to.name)),
+    el('span', { class: 'leg-go' }, t('Directions') + ' ›'));
 }
 
 /* Pick a sensible destination for a route's "Directions" button. */
@@ -260,22 +324,30 @@ function renderSchedule() {
       day.theme && el('div', { class: 'day-theme' }, t(day.theme))
     );
 
-    // Per-leg train directions between consecutive stops
-    const dayPlaces = items
-      .filter((it) => it.place_ref && data.places[it.place_ref])
-      .map((it) => data.places[it.place_ref]);
-    if (dayPlaces.length >= 2) {
-      const legs = el('div', { class: 'day-legs' },
+    // Door-to-door train directions: one A->B leg per hop, including the JFK
+    // arrival and each group's departure. Split per group on days that diverge.
+    let groupsSet;
+    if (VIEW !== 'all') {
+      groupsSet = [VIEW];
+    } else {
+      const s = new Set();
+      (day.items || []).forEach((it) => (Array.isArray(it.groups) ? it.groups : [1, 2]).forEach((g) => s.add(g)));
+      groupsSet = [...s].sort();
+      if (!groupsSet.length) groupsSet = [1];
+    }
+    let chains = groupsSet.map((g) => ({ g, nodes: buildChain(day, g) })).filter((c) => c.nodes.length >= 2);
+    if (chains.length > 1 && chains.every((c) => chainKey(c.nodes) === chainKey(chains[0].nodes))) {
+      chains = [chains[0]]; // identical for every group -> show once, unlabeled
+    }
+    if (chains.length) {
+      const wrap = el('div', { class: 'day-legs' },
         el('div', { class: 'subhead' }, '🚆 ' + t('Train directions between stops')));
-      for (let i = 0; i < dayPlaces.length - 1; i++) {
-        const from = dayPlaces[i], to = dayPlaces[i + 1];
-        legs.append(
-          el('a', { class: 'leg', href: legDirectionsUrl(from, to), target: '_blank', rel: 'noopener' },
-            el('span', { class: 'leg-route' }, from.name, el('span', { class: 'leg-arrow' }, ' → '), to.name),
-            el('span', { class: 'leg-go' }, t('Directions') + ' ›'))
-        );
-      }
-      card.append(legs);
+      const labelEach = chains.length > 1;
+      chains.forEach((c) => {
+        if (labelEach) wrap.append(el('div', { class: 'leg-group-label grp-' + c.g }, t('Group') + ' ' + c.g));
+        for (let i = 0; i < c.nodes.length - 1; i++) wrap.append(legAnchor(c.nodes[i], c.nodes[i + 1]));
+      });
+      card.append(wrap);
     }
 
     if (day.summit && day.summit.length && dayApplies) {
