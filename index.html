@@ -18,7 +18,10 @@
           <div class="brand-sub" id="brand-dates">June 18–21, 2026</div>
         </div>
       </div>
-      <button id="today-btn" class="today-btn" type="button">Today</button>
+      <div class="topbar-actions">
+        <div id="lang-toggle"></div>
+        <button id="today-btn" class="today-btn" type="button">Today</button>
+      </div>
     </div>
   </header>
 
@@ -34,13 +37,14 @@
   </main>
 
   <nav class="bottomnav" aria-label="Section navigation">
-    <a href="#overview" data-nav="overview"><span class="nav-ico">📋</span><span>Overview</span></a>
-    <a href="#schedule" data-nav="schedule"><span class="nav-ico">🗓️</span><span>Schedule</span></a>
-    <a href="#places" data-nav="places"><span class="nav-ico">📍</span><span>Places</span></a>
-    <a href="#routes" data-nav="routes"><span class="nav-ico">🚇</span><span>Routes</span></a>
-    <a href="#highlights" data-nav="highlights"><span class="nav-ico">⭐</span><span>Group</span></a>
+    <a href="#overview" data-nav="overview"><span class="nav-ico">📋</span><span class="nav-label">Overview</span></a>
+    <a href="#schedule" data-nav="schedule"><span class="nav-ico">🗓️</span><span class="nav-label">Schedule</span></a>
+    <a href="#places" data-nav="places"><span class="nav-ico">📍</span><span class="nav-label">Places</span></a>
+    <a href="#routes" data-nav="routes"><span class="nav-ico">🚇</span><span class="nav-label">Routes</span></a>
+    <a href="#highlights" data-nav="highlights"><span class="nav-ico">⭐</span><span class="nav-label">Group</span></a>
   </nav>
 
+  <script src="i18n.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

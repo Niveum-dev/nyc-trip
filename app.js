@@ -20,28 +20,36 @@ const el = (tag, props = {}, ...kids) => {
 const esc = (s) => String(s ?? '');
 const enc = encodeURIComponent;
 
+/* ---------- i18n ---------- */
+let LANG = 'en';
+// Translate a string; falls back to English (the original) when missing.
+function t(s) {
+  if (LANG === 'es' && s != null && window.I18N_ES && window.I18N_ES[s] != null) return window.I18N_ES[s];
+  return s;
+}
+function parseLang() {
+  const l = new URLSearchParams(location.search).get('lang');
+  return l === 'es' ? 'es' : 'en';
+}
+
 const TYPE_LABELS = { food: 'Food', sight: 'Sight', transit: 'Transit', hotel: 'Hotel', summit: 'Summit' };
 
 /* ---------- Group state ---------- */
-// view: 'all' | 1 | 2
 let DATA = null;
-let VIEW = 'all';
+let VIEW = 'all'; // 'all' | 1 | 2
 
 function parseView() {
-  const params = new URLSearchParams(location.search);
-  const g = params.get('group');
+  const g = new URLSearchParams(location.search).get('group');
   if (g === '1') return 1;
   if (g === '2') return 2;
   return 'all';
 }
-// Does an entry (with .groups array) belong in the current view?
 function inView(entry) {
   if (VIEW === 'all') return true;
   const groups = entry && entry.groups;
-  if (!Array.isArray(groups)) return true; // no group tag = applies to everyone
+  if (!Array.isArray(groups)) return true;
   return groups.includes(VIEW);
 }
-// Is this entry split (applies to only one group)? Used for badging in "Everyone" view.
 function isSplit(entry) {
   const g = entry && entry.groups;
   return Array.isArray(g) && g.length === 1;
@@ -62,9 +70,7 @@ function telUrl(phone) {
   return 'tel:' + String(phone).replace(/[^\d+]/g, '');
 }
 
-/* Google Maps transit directions for a single leg (place A -> place B).
-   Opening one shows the real trains + departure/arrival times for that segment.
-   Uses lat,lng when available, else the URL-encoded address. */
+/* Transit directions for a single leg (place A -> place B). */
 function legPoint(p) {
   return (p.lat != null && p.lng != null) ? `${p.lat},${p.lng}` : enc(p.address || p.name || '');
 }
@@ -86,56 +92,70 @@ function routeDestination(route) {
     ['holiday inn', 'Holiday Inn Express, Long Island City, NY'],
     ['lic', 'Court Sq, Long Island City, NY'],
   ];
-  for (const [kw, addr] of byKey) {
-    if (title.includes(kw)) return addr;
-  }
+  for (const [kw, addr] of byKey) if (title.includes(kw)) return addr;
   const steps = route.steps || [];
   return steps.length ? steps[steps.length - 1] : (route.title || 'New York, NY');
 }
 
 function typePill(type) {
-  const label = TYPE_LABELS[type] || type || 'Item';
+  const label = t(TYPE_LABELS[type] || type || 'Item');
   return el('span', { class: `pill t-${type || 'transit'}` },
     el('span', { class: `dot d-${type || 'transit'}` }), label);
 }
 function groupPill(n) {
-  return el('span', { class: `pill grp grp-${n}` }, 'Group ' + n);
+  return el('span', { class: `pill grp grp-${n}` }, t('Group') + ' ' + n);
 }
 
-/* ---------- Group toggle + banner ---------- */
-function setView(next, push = true) {
+/* ---------- Toggles ---------- */
+function setView(next) {
   VIEW = next;
-  // update URL
   const url = new URL(location.href);
   if (next === 'all') url.searchParams.delete('group');
   else url.searchParams.set('group', String(next));
-  if (push) history.replaceState(null, '', url);
-  // re-render
+  history.replaceState(null, '', url);
   render();
-  // reflect toggle state
-  document.querySelectorAll('.gtoggle button').forEach((b) => {
-    b.classList.toggle('active', b.dataset.view === String(next));
-  });
+}
+function setLang(next) {
+  LANG = next;
+  document.documentElement.lang = next;
+  const url = new URL(location.href);
+  if (next === 'en') url.searchParams.delete('lang');
+  else url.searchParams.set('lang', next);
+  history.replaceState(null, '', url);
+  render();
 }
 
 function renderToggle() {
   const bar = $('#group-toggle');
   bar.innerHTML = '';
-  const groups = DATA.groups || {};
   const opts = [
-    { view: 'all', label: 'Everyone' },
-    { view: '1', label: groups['1'] ? 'Group 1' : 'Group 1' },
-    { view: '2', label: groups['2'] ? 'Group 2' : 'Group 2' },
+    { view: 'all', label: t('Everyone') },
+    { view: '1', label: t('Group') + ' 1' },
+    { view: '2', label: t('Group') + ' 2' },
   ];
-  const wrap = el('div', { class: 'gtoggle' },
+  bar.append(el('div', { class: 'gtoggle' },
     opts.map((o) =>
       el('button', {
         type: 'button',
         'data-view': o.view,
         class: String(VIEW) === o.view ? 'active' : '',
         onclick: () => setView(o.view === 'all' ? 'all' : Number(o.view)),
-      }, o.label)));
-  bar.append(wrap);
+      }, o.label))));
+}
+
+function renderLangToggle() {
+  const bar = $('#lang-toggle');
+  if (!bar) return;
+  bar.innerHTML = '';
+  const opts = [{ lang: 'en', label: 'EN' }, { lang: 'es', label: 'ES' }];
+  bar.append(el('div', { class: 'langtoggle', role: 'group', 'aria-label': 'Language' },
+    opts.map((o) =>
+      el('button', {
+        type: 'button',
+        'data-lang': o.lang,
+        class: LANG === o.lang ? 'active' : '',
+        onclick: () => setLang(o.lang),
+      }, o.label))));
 }
 
 function groupBanner() {
@@ -143,15 +163,14 @@ function groupBanner() {
   const g = (DATA.groups || {})[String(VIEW)];
   if (!g) return null;
   return el('div', { class: `gbanner gbanner-${VIEW}` },
-    el('div', { class: 'gb-name' }, g.name || ('Group ' + VIEW)),
-    g.departure ? el('div', { class: 'gb-dep' }, '🛫 Departs: ' + g.departure) : null,
-    g.description ? el('div', { class: 'gb-desc' }, g.description) : null);
+    el('div', { class: 'gb-name' }, t(g.name) || (t('Group') + ' ' + VIEW)),
+    g.departure ? el('div', { class: 'gb-dep' }, '🛫 ' + t('Departs:') + ' ' + t(g.departure)) : null,
+    g.description ? el('div', { class: 'gb-desc' }, t(g.description)) : null);
 }
 
 /* ---------- Renderers ---------- */
 function renderOverview() {
-  const data = DATA;
-  const t = data.trip;
+  const t_ = DATA.trip;
   const root = $('#overview');
   root.innerHTML = '';
 
@@ -159,63 +178,58 @@ function renderOverview() {
   if (banner) root.append(banner);
 
   root.append(
-    el('div', { class: 'section-head' },
-      el('span', { class: 'eyebrow' }, 'Your trip')),
+    el('div', { class: 'section-head' }, el('span', { class: 'eyebrow' }, t('Your trip'))),
     el('div', { class: 'hero' },
-      el('h1', {}, t.title),
-      el('div', { class: 'dates' }, t.dates),
-      t.travelers && el('div', { class: 'travelers' }, t.travelers))
+      el('h1', {}, t(t_.title)),
+      el('div', { class: 'dates' }, t(t_.dates)),
+      t_.travelers && el('div', { class: 'travelers' }, t(t_.travelers)))
   );
 
-  // Flights
-  const f = t.flights || {};
+  const f = t_.flights || {};
   root.append(el('div', { class: 'card' },
-    el('h3', {}, '✈️ Flights'),
+    el('h3', {}, '✈️ ' + t('Flights')),
     el('div', { class: 'flight-grid' },
       f.arrival && el('div', { class: 'flight' },
-        el('div', { class: 'tag' }, 'Arrival · ' + (f.arrival.date || '')),
+        el('div', { class: 'tag' }, t('Arrival') + ' · ' + t(f.arrival.date || '')),
         el('div', { class: 'route' }, `${f.arrival.from} → ${f.arrival.to}`),
         el('div', { class: 'times' }, `${f.arrival.depart} – ${f.arrival.arrive}`),
         f.arrival.aircraft && el('div', { class: 'times' }, f.arrival.aircraft)),
       f.departure && el('div', { class: 'flight' },
-        el('div', { class: 'tag' }, 'Departure · ' + (f.departure.date || '')),
+        el('div', { class: 'tag' }, t('Departure') + ' · ' + t(f.departure.date || '')),
         el('div', { class: 'route' }, `${f.departure.from} → ${f.departure.to}`),
         el('div', { class: 'times' }, `${f.departure.depart} – ${f.departure.arrive}`),
         f.departure.aircraft && el('div', { class: 'times' }, f.departure.aircraft)))
   ));
 
-  // Hotels
-  const hotelCard = el('div', { class: 'card' }, el('h3', {}, '🏨 Hotels'));
-  (t.hotels || []).forEach((h) => {
+  const hotelCard = el('div', { class: 'card' }, el('h3', {}, '🏨 ' + t('Hotels')));
+  (t_.hotels || []).forEach((h) => {
     hotelCard.append(
-      el('div', { class: 'kv' }, el('span', { class: 'k' }, h.nights || ''),
+      el('div', { class: 'kv' }, el('span', { class: 'k' }, t(h.nights || '')),
         el('span', { class: 'v' },
-          el('strong', {}, h.name), h.area ? el('div', { class: 'tl-sub' }, h.area) : null))
+          el('strong', {}, h.name), h.area ? el('div', { class: 'tl-sub' }, t(h.area)) : null))
     );
   });
   root.append(hotelCard);
 
-  // Summit venue
-  const s = t.summit;
+  const s = t_.summit;
   if (s) {
     root.append(el('div', { class: 'card' },
       el('h3', {}, '🎤 ' + (s.name || 'Summit')),
       el('div', { class: 'meta' }, el('strong', {}, s.venue || ''), s.address ? ' · ' + s.address : ''),
       s.nearest_stations && s.nearest_stations.length
-        ? el('div', { class: 'tl-sub', style: 'margin-top:6px' }, '🚇 ' + s.nearest_stations.join(' · '))
+        ? el('div', { class: 'tl-sub', style: 'margin-top:6px' }, '🚇 ' + s.nearest_stations.map(t).join(' · '))
         : null,
       el('div', { class: 'btn-row' },
-        s.address && el('a', { class: 'btn btn-teal', href: mapsSearchUrl({ address: s.address }), target: '_blank', rel: 'noopener' }, '📍 Open in Maps'),
+        s.address && el('a', { class: 'btn btn-teal', href: mapsSearchUrl({ address: s.address }), target: '_blank', rel: 'noopener' }, '📍 ' + t('Open in Maps')),
         s.phone && el('a', { class: 'btn btn-ghost', href: telUrl(s.phone) }, '📞 ' + s.phone))
     ));
   }
 
-  // Payment notes
-  if (t.payment_notes && t.payment_notes.length) {
+  if (t_.payment_notes && t_.payment_notes.length) {
     root.append(
       el('div', { class: 'notebox' },
-        el('div', { class: 'nb-title' }, '💳 Transit & payment'),
-        el('ul', {}, t.payment_notes.map((n) => el('li', {}, n))))
+        el('div', { class: 'nb-title' }, '💳 ' + t('Transit & payment')),
+        el('ul', {}, t_.payment_notes.map((n) => el('li', {}, t(n)))))
     );
   }
 }
@@ -225,13 +239,11 @@ function renderSchedule() {
   const root = $('#schedule');
   root.innerHTML = '';
   root.append(el('div', { class: 'section-head' },
-    el('span', { class: 'eyebrow' }, 'Itinerary'),
-    el('h2', {}, 'Day by Day')));
+    el('span', { class: 'eyebrow' }, t('Itinerary')),
+    el('h2', {}, t('Day by Day'))));
 
   (data.schedule || []).forEach((day) => {
     const items = (day.items || []).filter(inView);
-    // In single-group view, hide a day entirely if it has no items for this group
-    // (keep summit-only days only if summit exists AND group present that day).
     const dayGroups = day.groups_present;
     const dayApplies = VIEW === 'all' || !Array.isArray(dayGroups) || dayGroups.includes(VIEW);
     if (VIEW !== 'all' && !items.length && !(day.summit && day.summit.length && dayApplies)) return;
@@ -242,52 +254,43 @@ function renderSchedule() {
     card.append(
       el('div', { class: 'day-head' },
         el('div', {},
-          el('span', { class: 'day-name' }, day.day || ''),
-          day.group_present ? el('span', { class: 'badge-group', style: 'margin-left:8px' }, 'Group') : null),
-        el('span', { class: 'day-date' }, day.date || '')),
-      day.theme && el('div', { class: 'day-theme' }, day.theme)
+          el('span', { class: 'day-name' }, t(day.day || '')),
+          day.group_present ? el('span', { class: 'badge-group', style: 'margin-left:8px' }, t('Group')) : null),
+        el('span', { class: 'day-date' }, t(day.date || ''))),
+      day.theme && el('div', { class: 'day-theme' }, t(day.theme))
     );
 
-    // Train directions between consecutive stops, in time order.
-    // Each leg is its own A->B transit link so Maps shows real train times.
+    // Per-leg train directions between consecutive stops
     const dayPlaces = items
       .filter((it) => it.place_ref && data.places[it.place_ref])
       .map((it) => data.places[it.place_ref]);
     if (dayPlaces.length >= 2) {
       const legs = el('div', { class: 'day-legs' },
-        el('div', { class: 'subhead' }, '🚆 Train directions between stops'));
+        el('div', { class: 'subhead' }, '🚆 ' + t('Train directions between stops')));
       for (let i = 0; i < dayPlaces.length - 1; i++) {
         const from = dayPlaces[i], to = dayPlaces[i + 1];
         legs.append(
-          el('a', {
-            class: 'leg',
-            href: legDirectionsUrl(from, to),
-            target: '_blank',
-            rel: 'noopener',
-          },
-            el('span', { class: 'leg-route' },
-              from.name, el('span', { class: 'leg-arrow' }, ' → '), to.name),
-            el('span', { class: 'leg-go' }, 'Directions ›'))
+          el('a', { class: 'leg', href: legDirectionsUrl(from, to), target: '_blank', rel: 'noopener' },
+            el('span', { class: 'leg-route' }, from.name, el('span', { class: 'leg-arrow' }, ' → '), to.name),
+            el('span', { class: 'leg-go' }, t('Directions') + ' ›'))
         );
       }
       card.append(legs);
     }
 
-    // Summit block (only when present & relevant)
     if (day.summit && day.summit.length && dayApplies) {
       card.append(
-        el('div', { class: 'subhead' }, 'Summit schedule'),
+        el('div', { class: 'subhead' }, t('Summit schedule')),
         el('div', { class: 'summit-block' },
           day.summit.map((row) =>
             el('div', { class: 'summit-row' },
               el('span', { class: 'st' }, row.time || ''),
-              el('span', {}, row.label || ''))))
+              el('span', {}, t(row.label || '')))))
       );
     }
 
-    // Personal itinerary (filtered)
     if (items.length) {
-      card.append(el('div', { class: 'subhead' }, 'Itinerary'));
+      card.append(el('div', { class: 'subhead' }, t('Itinerary')));
       const tl = el('ul', { class: 'timeline' });
       items.forEach((item) => {
         const place = item.place_ref ? data.places[item.place_ref] : null;
@@ -295,14 +298,13 @@ function renderSchedule() {
         const type = item.type || 'transit';
 
         const tags = el('div', { class: 'tl-tags' }, typePill(type));
-        // In "Everyone" view, badge split items so it's clear who does what.
         if (VIEW === 'all' && isSplit(item)) tags.append(groupPill(item.groups[0]));
 
         let link = null;
         if (place) {
           link = el('a', { class: 'tl-link', href: mapsSearchUrl(place), target: '_blank', rel: 'noopener' }, '📍 ' + place.name + ' →');
         } else if (route) {
-          link = el('a', { class: 'tl-link', href: '#route-' + item.route_ref }, '🚇 ' + route.title + ' →');
+          link = el('a', { class: 'tl-link', href: '#route-' + item.route_ref }, '🚇 ' + t(route.title) + ' →');
         }
 
         tl.append(
@@ -310,8 +312,8 @@ function renderSchedule() {
             el('div', { class: 'tl-time' }, item.time || ''),
             el('div', { class: 'tl-rail' }, el('span', { class: `dot d-${type}` })),
             el('div', { class: 'tl-body' },
-              el('div', { class: 'tl-act' }, item.activity || ''),
-              place && place.when ? el('div', { class: 'tl-sub' }, place.when) : null,
+              el('div', { class: 'tl-act' }, t(item.activity || '')),
+              place && place.when ? el('div', { class: 'tl-sub' }, t(place.when)) : null,
               tags,
               link))
         );
@@ -328,10 +330,9 @@ function renderPlaces() {
   const root = $('#places');
   root.innerHTML = '';
   root.append(el('div', { class: 'section-head' },
-    el('span', { class: 'eyebrow' }, 'Where to go'),
-    el('h2', {}, 'Places')));
+    el('span', { class: 'eyebrow' }, t('Where to go')),
+    el('h2', {}, t('Places'))));
 
-  // Which places are referenced by items in the current view?
   let visiblePlaceKeys = null;
   if (VIEW !== 'all') {
     visiblePlaceKeys = new Set();
@@ -342,13 +343,12 @@ function renderPlaces() {
   }
 
   const groups = {
-    food: { title: '🍜 Food', items: [] },
-    sight: { title: '🏙️ Sights', items: [] },
+    food: { title: '🍜 ' + t('Food'), items: [] },
+    sight: { title: '🏙️ ' + t('Sights'), items: [] },
   };
   Object.entries(data.places || {}).forEach(([key, p]) => {
     if (visiblePlaceKeys && !visiblePlaceKeys.has(key)) return;
-    const cat = p.category === 'sight' ? 'sight' : 'food';
-    groups[cat].items.push(p);
+    (p.category === 'sight' ? groups.sight : groups.food).items.push(p);
   });
 
   let any = false;
@@ -359,7 +359,7 @@ function renderPlaces() {
       el('span', { class: 'tl-sub', style: 'font-weight:600' }, `(${group.items.length})`)));
     group.items.forEach((p) => root.append(placeCard(p)));
   });
-  if (!any) root.append(el('div', { class: 'tl-sub', style: 'padding:8px 2px' }, 'No places for this group view.'));
+  if (!any) root.append(el('div', { class: 'tl-sub', style: 'padding:8px 2px' }, t('No places for this group view.')));
 }
 
 function placeCard(p) {
@@ -367,16 +367,16 @@ function placeCard(p) {
   card.append(
     el('div', { class: 'place-top' },
       el('div', {}, el('h3', {}, p.name), p.price ? el('span', { class: 'meta' }, p.price) : null),
-      p.when ? el('div', { class: 'place-when' }, p.when) : null)
+      p.when ? el('div', { class: 'place-when' }, t(p.when)) : null)
   );
-  if (p.address) card.append(el('div', { class: 'kv' }, el('span', { class: 'k' }, 'Where'), el('span', { class: 'v' }, p.address)));
-  if (p.hours) card.append(el('div', { class: 'kv' }, el('span', { class: 'k' }, 'Hours'), el('span', { class: 'v' }, p.hours)));
-  if (p.order) card.append(el('div', { class: 'place-order' }, el('b', {}, 'Order: '), p.order));
-  if (p.notes) card.append(el('div', { class: 'place-notes' }, p.notes));
+  if (p.address) card.append(el('div', { class: 'kv' }, el('span', { class: 'k' }, t('Where')), el('span', { class: 'v' }, p.address)));
+  if (p.hours) card.append(el('div', { class: 'kv' }, el('span', { class: 'k' }, t('Hours')), el('span', { class: 'v' }, t(p.hours))));
+  if (p.order) card.append(el('div', { class: 'place-order' }, el('b', {}, t('Order:') + ' '), t(p.order)));
+  if (p.notes) card.append(el('div', { class: 'place-notes' }, t(p.notes)));
   card.append(
     el('div', { class: 'btn-row' },
-      el('a', { class: 'btn btn-teal', href: mapsSearchUrl(p), target: '_blank', rel: 'noopener' }, '📍 Open in Maps'),
-      p.phone ? el('a', { class: 'btn btn-ghost', href: telUrl(p.phone) }, '📞 Call') : null)
+      el('a', { class: 'btn btn-teal', href: mapsSearchUrl(p), target: '_blank', rel: 'noopener' }, '📍 ' + t('Open in Maps')),
+      p.phone ? el('a', { class: 'btn btn-ghost', href: telUrl(p.phone) }, '📞 ' + t('Call')) : null)
   );
   return card;
 }
@@ -386,30 +386,29 @@ function renderRoutes() {
   const root = $('#routes');
   root.innerHTML = '';
   root.append(el('div', { class: 'section-head' },
-    el('span', { class: 'eyebrow' }, 'Getting around'),
-    el('h2', {}, 'Train Routes')));
+    el('span', { class: 'eyebrow' }, t('Getting around')),
+    el('h2', {}, t('Train Routes'))));
 
   let any = false;
   Object.entries(data.routes || {}).forEach(([key, r]) => {
     if (!inView(r)) return;
     any = true;
     const dest = routeDestination(r);
-    const titleRow = el('h3', {}, '🚇 ' + (r.title || key));
     const card = el('div', { class: 'card route-card', id: 'route-' + key, style: 'scroll-margin-top:80px' },
-      titleRow,
+      el('h3', {}, '🚇 ' + t(r.title || key)),
       VIEW === 'all' && isSplit(r) ? el('div', { style: 'margin:2px 0 4px' }, groupPill(r.groups[0])) : null,
       el('div', { class: 'route-meta' },
-        r.when && el('span', { class: 'chip' }, '🕑 ' + r.when),
+        r.when && el('span', { class: 'chip' }, '🕑 ' + t(r.when)),
         r.cost && el('span', { class: 'chip' }, '💵 ' + r.cost),
         r.duration && el('span', { class: 'chip' }, '⏱️ ' + r.duration)),
-      el('ol', { class: 'steps' }, (r.steps || []).map((s) => el('li', {}, s))),
-      r.note && el('div', { class: 'route-note' }, '💡 ' + r.note),
+      el('ol', { class: 'steps' }, (r.steps || []).map((s) => el('li', {}, t(s)))),
+      r.note && el('div', { class: 'route-note' }, '💡 ' + t(r.note)),
       el('div', { class: 'btn-row' },
-        el('a', { class: 'btn btn-teal', href: directionsUrl(dest), target: '_blank', rel: 'noopener' }, '🧭 Directions'))
+        el('a', { class: 'btn btn-teal', href: directionsUrl(dest), target: '_blank', rel: 'noopener' }, '🧭 ' + t('Directions')))
     );
     root.append(card);
   });
-  if (!any) root.append(el('div', { class: 'tl-sub', style: 'padding:8px 2px' }, 'No routes for this group view.'));
+  if (!any) root.append(el('div', { class: 'tl-sub', style: 'padding:8px 2px' }, t('No routes for this group view.')));
 }
 
 function renderHighlights() {
@@ -419,18 +418,34 @@ function renderHighlights() {
   const list = (data.group_highlights || []).filter(inView);
   if (!list.length) return;
   root.append(el('div', { class: 'section-head' },
-    el('span', { class: 'eyebrow' }, 'First-timer must-sees'),
-    el('h2', {}, 'Group Highlights')));
+    el('span', { class: 'eyebrow' }, t('First-timer must-sees')),
+    el('h2', {}, t('Group Highlights'))));
 
   list.forEach((h, i) => {
     root.append(
       el('div', { class: 'card hl-card' },
         el('div', { class: 'hl-num' }, String(i + 1)),
         el('div', {},
-          el('h3', {}, h.sight),
-          h.when ? el('div', { class: 'tl-sub', style: 'font-weight:700;color:var(--teal-dark)' }, h.when) : null,
-          h.note ? el('div', { class: 'place-notes' }, h.note) : null))
+          el('h3', {}, t(h.sight)),
+          h.when ? el('div', { class: 'tl-sub', style: 'font-weight:700;color:var(--teal-dark)' }, t(h.when)) : null,
+          h.note ? el('div', { class: 'place-notes' }, t(h.note)) : null))
     );
+  });
+}
+
+/* ---------- Chrome (nav labels, brand, Today button) ---------- */
+const NAV_LABELS = { overview: 'Overview', schedule: 'Schedule', places: 'Places', routes: 'Routes', highlights: 'Group' };
+function applyChrome() {
+  if (DATA && DATA.trip) {
+    if (DATA.trip.title) $('#brand-title').textContent = t(DATA.trip.title);
+    if (DATA.trip.dates) $('#brand-dates').textContent = t(DATA.trip.dates);
+    document.title = (t(DATA.trip.title) || 'Trip') + ' · ' + (t(DATA.trip.dates) || '');
+  }
+  const tb = $('#today-btn');
+  if (tb) tb.textContent = t('Today');
+  document.querySelectorAll('.bottomnav a').forEach((a) => {
+    const label = a.querySelector('.nav-label');
+    if (label && NAV_LABELS[a.dataset.nav]) label.textContent = t(NAV_LABELS[a.dataset.nav]);
   });
 }
 
@@ -452,8 +467,7 @@ function setupNav() {
 }
 
 function setupToday() {
-  const data = DATA;
-  const days = data.schedule || [];
+  const days = DATA.schedule || [];
   const monthMap = { january:0,february:1,march:2,april:3,may:4,june:5,july:6,august:7,september:8,october:9,november:10,december:11 };
   function parseTripDate(dateStr) {
     const m = String(dateStr).trim().match(/([A-Za-z]+)\s+(\d+)/);
@@ -477,7 +491,7 @@ function setupToday() {
   if (exactCard) {
     exactCard.classList.add('is-today');
     const head = exactCard.querySelector('.day-head > div');
-    if (head && !head.querySelector('.today-tag')) head.append(el('span', { class: 'today-tag', style: 'margin-left:8px' }, 'Today'));
+    if (head && !head.querySelector('.today-tag')) head.append(el('span', { class: 'today-tag', style: 'margin-left:8px' }, t('Today')));
   }
   const target = exactCard || fallbackCard || (days.length ? document.getElementById('day-' + (days[0].day || '').toLowerCase()) : null);
   const btn = $('#today-btn');
@@ -491,6 +505,8 @@ function setupToday() {
 function render() {
   document.body.classList.toggle('view-group', VIEW !== 'all');
   document.body.setAttribute('data-view', String(VIEW));
+  applyChrome();
+  renderLangToggle();
   renderToggle();
   renderOverview();
   renderSchedule();
@@ -508,18 +524,13 @@ async function boot() {
     if (!res.ok) throw new Error('HTTP ' + res.status);
     DATA = await res.json();
     VIEW = parseView();
-
-    if (DATA.trip) {
-      if (DATA.trip.title) $('#brand-title').textContent = DATA.trip.title;
-      if (DATA.trip.dates) $('#brand-dates').textContent = DATA.trip.dates;
-      document.title = (DATA.trip.title || 'Trip') + ' · ' + (DATA.trip.dates || '');
-    }
+    LANG = parseLang();
+    document.documentElement.lang = LANG;
 
     $('#loading').remove();
     render();
 
-    // sync if user navigates back/forward
-    window.addEventListener('popstate', () => { VIEW = parseView(); render(); });
+    window.addEventListener('popstate', () => { VIEW = parseView(); LANG = parseLang(); render(); });
   } catch (err) {
     const loading = $('#loading');
     if (loading) {
