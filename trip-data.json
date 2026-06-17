@@ -159,9 +159,9 @@
         },
         {
           "time": "11:05 PM",
-          "activity": "Junior's Cheesecake (open late)",
-          "type": "food",
-          "place_ref": "juniors",
+          "activity": "M&M's World + Hershey's (browse)",
+          "type": "sight",
+          "place_ref": "candy_stores",
           "groups": [
             1,
             2
@@ -649,16 +649,15 @@
       "notes": "The glowing red glass staircase above the TKTS booth. Climb up for the iconic elevated photo over the Times Square lights. Free, right where you already are.",
       "when": "Thu night (group)"
     },
-    "juniors": {
-      "name": "Junior's Cheesecake",
-      "category": "food",
-      "address": "1626 Broadway, New York, NY 10019",
-      "lat": 40.7616,
-      "lng": -73.9841,
+    "candy_stores": {
+      "name": "M&M's World & Hershey's",
+      "category": "sight",
+      "address": "1600 Broadway, New York, NY 10019",
+      "lat": 40.7600,
+      "lng": -73.9846,
       "hours": "Open late (~till midnight)",
-      "price": "$$",
-      "order": "Original NY cheesecake; a slice to share",
-      "notes": "NYC's most famous cheesecake, a block off the square. Perfect sweet after the Joe's slice without leaving the area.",
+      "price": "Free to browse",
+      "notes": "Three neon-lit floors of M&M's right on Times Square, with Hershey's Chocolate World a block away. Free to wander, fun for first-timers, open late - grab candy if you want a souvenir.",
       "when": "Thu late night"
     },
     "bryant_park": {

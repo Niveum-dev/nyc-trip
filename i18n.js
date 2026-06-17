@@ -100,7 +100,7 @@ window.I18N_ES = {
   'N/W back to LIC': 'N/W de regreso a LIC',
   '7 train back to LIC': 'Tren 7 de regreso a LIC',
   'TKTS Red Steps photo': 'Foto en las Escaleras Rojas de TKTS',
-  "Junior's Cheesecake (open late)": "Junior's Cheesecake (abierto hasta tarde)",
+  "M&M's World + Hershey's (browse)": "M&M's World + Hershey's (para curiosear)",
   'Top of the Rock - sunset + skyline': 'Top of the Rock - atardecer + horizonte',
   '5th Avenue walk south (group)': 'Caminata al sur por la 5ta Avenida (grupo)',
   'Bryant Park': 'Bryant Park',
@@ -262,10 +262,10 @@ window.I18N_ES = {
   '~7 AM - 10 PM (later in summer)': '~7 AM - 10 PM (más tarde en verano)',
   '~5 AM - 2 AM daily': '~5 AM - 2 AM todos los días',
   /* order */
-  'Original NY cheesecake; a slice to share': 'Cheesecake original de NY; una porción para compartir',
+  'Free to browse': 'Gratis para curiosear',
   /* place notes */
   'The glowing red glass staircase above the TKTS booth. Climb up for the iconic elevated photo over the Times Square lights. Free, right where you already are.': 'La escalinata de vidrio rojo iluminada sobre la taquilla TKTS. Sube para la foto elevada icónica sobre las luces de Times Square. Gratis, justo donde ya estás.',
-  "NYC's most famous cheesecake, a block off the square. Perfect sweet after the Joe's slice without leaving the area.": "El cheesecake más famoso de NYC, a una cuadra de la plaza. El dulce perfecto tras la porción de Joe's sin alejarte.",
+  'Three neon-lit floors of M&M\'s right on Times Square, with Hershey\'s Chocolate World a block away. Free to wander, fun for first-timers, open late - grab candy if you want a souvenir.': 'Tres pisos llenos de neón de M&M\'s en pleno Times Square, con Hershey\'s Chocolate World a una cuadra. Gratis para recorrer, divertido para primerizos, abierto hasta tarde: lleva dulces de recuerdo si quieres.',
   'The best skyline view in NYC - the Empire State Building is IN the view. June sunset ~8:30 PM, so going at dusk catches golden hour into full city lights. Timed tickets - BOOK AHEAD, it sells out.': 'La mejor vista del horizonte de NYC: el Empire State aparece EN la vista. Atardecer de junio ~8:30 PM, así que ir al anochecer atrapa la hora dorada y las luces de la ciudad. Boletos con horario: RESERVA CON ANTICIPACIÓN, se agotan.',
   'Leafy midtown oasis behind the NY Public Library (the famous stone lions out front). A nice breather on the walk down from 5th Ave toward Times Square.': 'Oasis verde de Midtown detrás de la Biblioteca Pública de NY (los famosos leones de piedra al frente). Un buen respiro en la caminata desde la 5ta Avenida hacia Times Square.',
   'Breathtaking Beaux-Arts main hall with the turquoise celestial ceiling. Free and open late. Bonus: the 7 train from here runs straight back to LIC (Court Sq).': 'Imponente salón principal estilo Beaux-Arts con el techo celeste turquesa. Gratis y abierto hasta tarde. Extra: el tren 7 desde aquí va directo de vuelta a LIC (Court Sq).',
