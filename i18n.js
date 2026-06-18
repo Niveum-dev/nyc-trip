@@ -19,6 +19,7 @@ window.I18N_ES = {
   'Departure': 'Salida',
   'Hotels': 'Hoteles',
   'Free hotel shuttle': 'Shuttle gratis del hotel',
+  'Free shuttle': 'Shuttle gratis',
   'Call for pickup': 'Llamar para recogida',
   '7:00-11:00 AM & 5:00-9:00 PM': '7:00-11:00 AM y 5:00-9:00 PM',
   'Vernon Blvd-Jackson Av (7 train only)': 'Vernon Blvd-Jackson Av (solo tren 7)',

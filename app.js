@@ -267,21 +267,21 @@ function renderOverview() {
 
   const hotelCard = el('div', { class: 'card' }, el('h3', {}, '🏨 ' + t('Hotels')));
   (t_.hotels || []).forEach((h) => {
-    hotelCard.append(
+    const block = el('div', { class: 'hotel-block' },
       el('div', { class: 'kv' }, el('span', { class: 'k' }, t(h.nights || '')),
         el('span', { class: 'v' },
-          el('strong', {}, h.name), h.area ? el('div', { class: 'tl-sub' }, t(h.area)) : null))
-    );
+          el('strong', {}, h.name), h.area ? el('div', { class: 'tl-sub' }, t(h.area)) : null)));
     const s = h.shuttle;
     if (s) {
-      hotelCard.append(el('div', { class: 'shuttle' },
-        el('div', { class: 'shuttle-title' }, '🚐 ' + t('Free hotel shuttle')),
+      block.append(el('div', { class: 'shuttle' },
+        el('div', { class: 'shuttle-title' }, '🚐 ' + t('Free shuttle') + ' · ' + h.name),
         s.hours ? el('div', { class: 'shuttle-row' }, '🕑 ' + t(s.hours)) : null,
         s.stop ? el('div', { class: 'shuttle-row' }, '📍 ' + t(s.stop)) : null,
         s.note ? el('div', { class: 'shuttle-note' }, t(s.note)) : null,
         s.phone ? el('a', { class: 'btn btn-teal', href: telUrl(s.phone), style: 'margin-top:10px' },
           '📞 ' + t('Call for pickup') + ' · ' + s.phone) : null));
     }
+    hotelCard.append(block);
   });
   root.append(hotelCard);
 

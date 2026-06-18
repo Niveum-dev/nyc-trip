@@ -234,6 +234,13 @@ main {
 .notebox li { font-size: 13.5px; margin: 4px 0; }
 .notebox .nb-title { font-weight: 700; font-size: 13px; color: #8a6d12; text-transform: uppercase; letter-spacing: 0.05em; }
 
+/* ---------- Hotels ---------- */
+.hotel-block + .hotel-block {
+  border-top: 1px solid var(--line);
+  margin-top: 12px;
+  padding-top: 12px;
+}
+
 /* ---------- Hotel shuttle ---------- */
 .shuttle {
   margin: 8px 0 2px;
