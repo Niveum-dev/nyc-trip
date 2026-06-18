@@ -272,6 +272,16 @@ function renderOverview() {
         el('span', { class: 'v' },
           el('strong', {}, h.name), h.area ? el('div', { class: 'tl-sub' }, t(h.area)) : null))
     );
+    const s = h.shuttle;
+    if (s) {
+      hotelCard.append(el('div', { class: 'shuttle' },
+        el('div', { class: 'shuttle-title' }, '🚐 ' + t('Free hotel shuttle')),
+        s.hours ? el('div', { class: 'shuttle-row' }, '🕑 ' + t(s.hours)) : null,
+        s.stop ? el('div', { class: 'shuttle-row' }, '📍 ' + t(s.stop)) : null,
+        s.note ? el('div', { class: 'shuttle-note' }, t(s.note)) : null,
+        s.phone ? el('a', { class: 'btn btn-teal', href: telUrl(s.phone), style: 'margin-top:10px' },
+          '📞 ' + t('Call for pickup') + ' · ' + s.phone) : null));
+    }
   });
   root.append(hotelCard);
 

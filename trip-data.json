@@ -25,7 +25,13 @@
       {
         "name": "Holiday Inn Express LIC",
         "nights": "Thu, Fri",
-        "area": "Long Island City, near Court Sq"
+        "area": "Long Island City, near Court Sq",
+        "shuttle": {
+          "phone": "347-617-1660",
+          "hours": "7:00-11:00 AM & 5:00-9:00 PM",
+          "stop": "Vernon Blvd-Jackson Av (7 train only)",
+          "note": "Free hotel shuttle - PREFERRED. Call to schedule a pickup at the Vernon Blvd-Jackson Av (7 train) station during shuttle hours. Option 2: walk from the station if the shuttle isn't running."
+        }
       },
       {
         "name": "TRYP by Wyndham Times Square South",
@@ -756,7 +762,7 @@
         "E train toward Manhattan, tap card ($3)",
         "Ride to COURT SQ-23 ST (~25 min), walk to hotel"
       ],
-      "note": "The E is the only subway that reaches JFK's AirTrain at Jamaica.",
+      "note": "The E is the only subway to JFK's AirTrain at Jamaica. Hotel shuttle (preferred): during 7-11 AM or 5-9 PM, take the 7 to Vernon Blvd-Jackson Av and call 347-617-1660 for a free pickup. Option 2: walk from Court Sq.",
       "groups": [
         1,
         2

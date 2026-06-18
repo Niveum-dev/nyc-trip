@@ -234,6 +234,19 @@ main {
 .notebox li { font-size: 13.5px; margin: 4px 0; }
 .notebox .nb-title { font-weight: 700; font-size: 13px; color: #8a6d12; text-transform: uppercase; letter-spacing: 0.05em; }
 
+/* ---------- Hotel shuttle ---------- */
+.shuttle {
+  margin: 8px 0 2px;
+  padding: 12px 14px;
+  background: #eef6f7;
+  border: 1px solid #cfe6e8;
+  border-radius: 12px;
+}
+.shuttle-title { font-weight: 800; font-size: 14px; color: var(--teal-dark); margin-bottom: 6px; }
+.shuttle-row { font-size: 13.5px; color: var(--ink); margin: 3px 0; }
+.shuttle-note { font-size: 13px; color: var(--muted); margin-top: 6px; line-height: 1.4; }
+.shuttle .btn { width: 100%; justify-content: center; }
+
 /* ---------- Pills / dots ---------- */
 .pill {
   display: inline-flex;
