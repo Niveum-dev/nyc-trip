@@ -86,6 +86,13 @@ const NODES = {
   tryp:    { key: 'tryp',    name: 'TRYP by Wyndham',         q: 'TRYP by Wyndham Times Square South, 345 W 35th St, New York, NY 10001' },
   melrose: { key: 'melrose', name: 'Melrose Ballroom',        q: 'Melrose Ballroom, 36-08 33rd St, Long Island City, NY 11106' },
 };
+// The Holiday Inn shuttle picks up / drops off at this 7-train station.
+const SHUTTLE_STOP = { key: 'shuttle_stop', name: 'Vernon Blvd-Jackson Av (7)', q: 'Vernon Blvd-Jackson Av Subway Station, Long Island City, NY 11101' };
+// True if this node is a hotel that offers a shuttle (only Holiday Inn LIC).
+function hotelHasShuttle(node) {
+  return !!node && node.key === 'lic' && (DATA.trip.hotels || []).some((h) => h.shuttle && /holiday inn/i.test(h.name));
+}
+
 // Where each route leg starts — used to seed the first stop of a chain
 // (e.g. the evening tours start at the summit; Sunday starts at TRYP).
 const ROUTE_ORIGIN = {
@@ -140,6 +147,22 @@ function legAnchor(from, to) {
   return el('a', { class: 'leg', href: legDirectionsUrl(from, to), target: '_blank', rel: 'noopener' },
     el('span', { class: 'leg-route' }, t(from.name), el('span', { class: 'leg-arrow' }, ' → '), t(to.name)),
     el('span', { class: 'leg-go' }, t('Directions') + ' ›'));
+}
+// Optional shuttle directions for legs touching a hotel that has a shuttle.
+function shuttleAltLink(origin, dest, label) {
+  return el('a', { class: 'leg-alt', href: legDirectionsUrl(origin, dest), target: '_blank', rel: 'noopener' }, '🚐 ' + label + ' ›');
+}
+function legRow(from, to) {
+  const main = legAnchor(from, to);
+  const extras = [];
+  if (hotelHasShuttle(to)) {
+    extras.push(shuttleAltLink(from, SHUTTLE_STOP, t('Shuttle option: to') + ' ' + SHUTTLE_STOP.name + ' (' + t('call to schedule pickup') + ')'));
+  }
+  if (hotelHasShuttle(from)) {
+    extras.push(shuttleAltLink(SHUTTLE_STOP, to, t('Shuttle option: continue from') + ' ' + SHUTTLE_STOP.name));
+  }
+  if (!extras.length) return main;
+  return el('div', { class: 'leg-wrap' }, main, ...extras);
 }
 
 /* Pick a sensible destination for a route's "Directions" button. */
@@ -355,7 +378,7 @@ function renderSchedule() {
       const labelEach = chains.length > 1;
       chains.forEach((c) => {
         if (labelEach) wrap.append(el('div', { class: 'leg-group-label grp-' + c.g }, t('Group') + ' ' + c.g));
-        for (let i = 0; i < c.nodes.length - 1; i++) wrap.append(legAnchor(c.nodes[i], c.nodes[i + 1]));
+        for (let i = 0; i < c.nodes.length - 1; i++) wrap.append(legRow(c.nodes[i], c.nodes[i + 1]));
       });
       card.append(wrap);
     }

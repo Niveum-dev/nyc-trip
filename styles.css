@@ -388,6 +388,18 @@ main {
   min-height: 46px;
 }
 .leg:active { background: #e6f3f4; }
+.leg-wrap { margin-bottom: 6px; }
+.leg-wrap .leg { margin-bottom: 0; }
+.leg-alt {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--teal-dark);
+  text-decoration: none;
+  line-height: 1.35;
+  padding: 6px 6px 2px 14px;
+}
+.leg-alt:active { color: var(--teal); }
 .leg-group-label { font-size: 12px; font-weight: 800; margin: 10px 0 6px; text-transform: uppercase; letter-spacing: 0.03em; }
 .leg-group-label.grp-1 { color: var(--g1); }
 .leg-group-label.grp-2 { color: var(--g2); }
