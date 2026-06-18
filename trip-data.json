@@ -90,9 +90,10 @@
           ]
         },
         {
-          "time": "12:40 PM",
-          "activity": "Check in / drop bags at Holiday Inn LIC",
-          "type": "hotel",
+          "time": "12:15 PM",
+          "activity": "Shake Shack lunch (Sunnyside)",
+          "type": "food",
+          "place_ref": "shake_shack",
           "groups": [
             1,
             2
@@ -100,9 +101,8 @@
         },
         {
           "time": "1:00 PM",
-          "activity": "Lunch",
-          "type": "food",
-          "place_ref": "kyuramen",
+          "activity": "Check in / drop bags at Holiday Inn LIC",
+          "type": "hotel",
           "groups": [
             1,
             2
@@ -527,16 +527,14 @@
     }
   ],
   "places": {
-    "kyuramen": {
-      "name": "Kyuramen LIC",
+    "shake_shack": {
+      "name": "Shake Shack (Sunnyside)",
       "category": "food",
-      "address": "27-17 42nd Rd, Long Island City, NY 11101",
-      "lat": 40.7459,
-      "lng": -73.9498,
-      "hours": "11 AM - 10 PM (Fri/Sat till 11 PM)",
+      "address": "46-20 Queens Blvd, Sunnyside, NY 11104",
+      "hours": "~11 AM - 11 PM",
       "price": "$$",
-      "order": "Beef shoyu ramen, spicy pork ramen, yakitori",
-      "notes": "Near hotel. Mon-Thu 11 AM-5 PM items HALF PRICE.",
+      "order": "ShackBurger, crinkle-cut fries, and a shake",
+      "notes": "Quick burger stop in Sunnyside on the way in from JFK, before the hotel. Classic ShackBurger + fries + a shake.",
       "when": "Thu lunch"
     },
     "joes_pizza": {

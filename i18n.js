@@ -93,6 +93,7 @@ window.I18N_ES = {
 
   /* ---- schedule activities ---- */
   'Land at JFK Terminal 4': 'Aterrizaje en JFK Terminal 4',
+  'Shake Shack lunch (Sunnyside)': 'Almuerzo en Shake Shack (Sunnyside)',
   'Check in / drop bags at Holiday Inn LIC': 'Registro / dejar maletas en Holiday Inn LIC',
   'Summit check-in at Melrose Ballroom': 'Registro de la cumbre en Melrose Ballroom',
   'N/W to Times Square': 'N/W a Times Square',
@@ -153,6 +154,7 @@ window.I18N_ES = {
 
   /* ---- place "order" ---- */
   'Beef shoyu ramen, spicy pork ramen, yakitori': 'Ramen shoyu de res, ramen de cerdo picante, yakitori',
+  'ShackBurger, crinkle-cut fries, and a shake': 'ShackBurger, papas crinkle y un batido',
   'Plain cheese or pepperoni slice, fold and walk': 'Porción de queso o pepperoni, dóblala y camina',
   'Korean BBQ, bibimbap, tteokbokki, kimchi pancake': 'BBQ coreano, bibimbap, tteokbokki, panqueque de kimchi',
   'Roast pork + duck over rice, $9.50': 'Cerdo asado + pato sobre arroz, $9.50',
@@ -163,6 +165,7 @@ window.I18N_ES = {
 
   /* ---- place notes ---- */
   'Near hotel. Mon-Thu 11 AM-5 PM items HALF PRICE.': 'Cerca del hotel. Lun-jue 11 AM-5 PM platos a MITAD DE PRECIO.',
+  'Quick burger stop in Sunnyside on the way in from JFK, before the hotel. Classic ShackBurger + fries + a shake.': 'Parada rápida de hamburguesas en Sunnyside camino desde JFK, antes del hotel. ShackBurger clásica + papas + un batido.',
   'Classic NYC slice in Times Square. $4-5. Cash or card.': 'Porción clásica de NYC en Times Square. $4-5. Efectivo o tarjeta.',
   'Food court upstairs. Pay each vendor separately. 5 min from TRYP.': 'Patio de comidas arriba. Paga a cada vendedor por separado. 5 min de TRYP.',
   'CASH ONLY. CLOSES 7 PM - arrive by 6. Near Grand St (B/D).': 'SOLO EFECTIVO. CIERRA 7 PM - llega antes de las 6. Cerca de Grand St (B/D).',
