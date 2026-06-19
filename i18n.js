@@ -296,4 +296,30 @@ window.I18N_ES = {
   "The single best NYC skyline view - and you're already standing at Rockefeller. The Empire State Building is in the shot. June sunset ~8:30 PM, so go at dusk. Book timed tickets ahead.": 'La mejor vista del horizonte de NYC, y ya estás parado en Rockefeller. El Empire State sale en la foto. Atardecer de junio ~8:30 PM, así que ve al anochecer. Reserva boletos con horario.',
   "The plaza with Atlas & Prometheus, and St. Patrick's Cathedral across 5th Ave - free, stunning interior. All one easy walk.": 'La plaza con Atlas y Prometeo, y la Catedral de San Patricio cruzando la 5ta Avenida: gratis, interior impresionante. Todo en una sola caminata.',
   'Free, open late, and the celestial-ceiling main hall is a true first-timer wow. The 7 train from here runs straight back to LIC.': 'Gratis, abierto hasta tarde, y el salón principal con techo celeste es un verdadero asombro para primerizos. El tren 7 desde aquí va directo de vuelta a LIC.',
+
+  /* ---- Friday rework: WTC Memorial + Oculus + Levain + Ichiran ---- */
+  'E to World Trade Center': 'E al World Trade Center',
+  '9/11 Memorial pools (dusk)': 'Piletas del Memorial del 11-S (al anochecer)',
+  'The Oculus (lit at night)': 'The Oculus (iluminado de noche)',
+  'Levain cookies (NoHo, via Prince St)': 'Galletas Levain (NoHo, vía Prince St)',
+  'Ichiran ramen dinner (Times Sq)': 'Cena de ramen en Ichiran (Times Sq)',
+  /* hours / order */
+  '~7:30 AM - 8:00 PM (free)': '~7:30 AM - 8:00 PM (gratis)',
+  'Open late (transit hub / mall)': 'Abierto hasta tarde (centro de tránsito / mall)',
+  'Chocolate chip walnut cookie (the hockey puck)': 'Galleta de chispas de chocolate y nuez (tamaño gigante)',
+  /* place notes */
+  "The twin reflecting pools in the Twin Towers' footprints, names lit from within. Closes 8 PM - head straight here after summit. In June it's a serene dusk visit (not fully dark). Direct E from Court Sq to World Trade Center.": 'Las dos piletas reflectantes sobre las huellas de las Torres Gemelas, con los nombres iluminados desde adentro. Cierra a las 8 PM: ven directo aquí tras la cumbre. En junio es una visita serena al anochecer (no totalmente oscuro). E directo desde Court Sq al World Trade Center.',
+  'The soaring white winged structure beside the Memorial - stunning lit up at night, and unlike the Memorial it stays open late. This is where you get the WTC-at-night beauty.': 'La imponente estructura blanca con forma de alas junto al Memorial: espectacular iluminada de noche y, a diferencia del Memorial, abre hasta tarde. Aquí es donde consigues la belleza del WTC de noche.',
+  'Levain\'s NoHo shop, open till 11 PM - about 5 min walk from the Prince St station. Grab the famous giant cookies on the way uptown.': 'La tienda de Levain en NoHo, abierta hasta las 11 PM, a unos 5 min a pie de la estación Prince St. Lleva las famosas galletas gigantes camino al norte.',
+  /* route melrose_to_wtc */
+  'Melrose Ballroom to 9/11 Memorial (World Trade Center)': 'Melrose Ballroom al Memorial del 11-S (World Trade Center)',
+  'Leave right at the 7 PM close - the Memorial shuts at 8 PM': 'Sal justo al cierre de las 7 PM: el Memorial cierra a las 8 PM',
+  'Walk to Court Sq-23 St station': 'Camina a la estación Court Sq-23 St',
+  'E train toward Manhattan (World Trade Center is the last stop)': 'Tren E hacia Manhattan (World Trade Center es la última parada)',
+  'Ride to WORLD TRADE CENTER (~25 min), the Memorial is right there': 'Viaja hasta WORLD TRADE CENTER (~25 min), el Memorial está justo ahí',
+  'Go straight here first; everything else (Levain, Grand Central, Ichiran, Rockefeller) is north and stays open later. Return at the end: N/W from Times Square back to LIC.': 'Ven directo aquí primero; todo lo demás (Levain, Grand Central, Ichiran, Rockefeller) queda al norte y cierra más tarde. Regreso al final: N/W desde Times Square de vuelta a LIC.',
+  /* highlights */
+  '9/11 Memorial & The Oculus': 'Memorial del 11-S y The Oculus',
+  'Go straight here after summit - the Memorial pools (free) close at 8 PM. The Oculus next door is free, open late, and stunning lit up at night.': 'Ven directo aquí tras la cumbre: las piletas del Memorial (gratis) cierran a las 8 PM. The Oculus al lado es gratis, abre hasta tarde y es espectacular iluminado de noche.',
+  'The plaza with the Atlas & Prometheus statues, beautiful lit up at night. Last stop before heading home.': 'La plaza con las estatuas de Atlas y Prometeo, hermosa iluminada de noche. Última parada antes de volver.',
 };

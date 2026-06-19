@@ -98,7 +98,7 @@ function hotelHasShuttle(node) {
 const ROUTE_ORIGIN = {
   jfk_to_lic: NODES.jfk,
   melrose_to_timessq: NODES.melrose,
-  melrose_to_rockefeller: NODES.melrose,
+  melrose_to_wtc: NODES.melrose,
   melrose_to_gapstow: NODES.melrose,
   lic_to_jfk_group: NODES.lic,
   lic_to_tryp: NODES.lic,

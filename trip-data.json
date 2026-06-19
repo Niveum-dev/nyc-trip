@@ -221,20 +221,20 @@
       ],
       "items": [
         {
-          "time": "7:15 PM",
-          "activity": "N/W to 49 St",
+          "time": "7:05 PM",
+          "activity": "E to World Trade Center",
           "type": "transit",
-          "route_ref": "melrose_to_rockefeller",
+          "route_ref": "melrose_to_wtc",
           "groups": [
             1,
             2
           ]
         },
         {
-          "time": "7:45 PM",
-          "activity": "Radio City Music Hall (photo)",
+          "time": "7:40 PM",
+          "activity": "9/11 Memorial pools (dusk)",
           "type": "sight",
-          "place_ref": "radio_city",
+          "place_ref": "wtc_memorial",
           "groups": [
             1,
             2
@@ -242,9 +242,9 @@
         },
         {
           "time": "8:05 PM",
-          "activity": "Rockefeller Center (group)",
+          "activity": "The Oculus (lit at night)",
           "type": "sight",
-          "place_ref": "rockefeller",
+          "place_ref": "oculus",
           "groups": [
             1,
             2
@@ -252,46 +252,16 @@
         },
         {
           "time": "8:30 PM",
-          "activity": "St. Patrick's Cathedral (group)",
-          "type": "sight",
-          "place_ref": "st_patricks",
+          "activity": "Levain cookies (NoHo, via Prince St)",
+          "type": "food",
+          "place_ref": "levain_noho",
           "groups": [
             1,
             2
           ]
         },
         {
-          "time": "8:55 PM",
-          "activity": "5th Avenue walk south (group)",
-          "type": "sight",
-          "place_ref": "fifth_ave",
-          "groups": [
-            1,
-            2
-          ]
-        },
-        {
-          "time": "9:20 PM",
-          "activity": "NYPL Lions",
-          "type": "sight",
-          "place_ref": "nypl_lions",
-          "groups": [
-            1,
-            2
-          ]
-        },
-        {
-          "time": "9:35 PM",
-          "activity": "Bryant Park",
-          "type": "sight",
-          "place_ref": "bryant_park",
-          "groups": [
-            1,
-            2
-          ]
-        },
-        {
-          "time": "10:05 PM",
+          "time": "9:05 PM",
           "activity": "Grand Central Terminal",
           "type": "sight",
           "place_ref": "grand_central",
@@ -301,18 +271,28 @@
           ]
         },
         {
-          "time": "10:35 PM",
-          "activity": "Chrysler Building (photo)",
-          "type": "sight",
-          "place_ref": "chrysler",
+          "time": "9:30 PM",
+          "activity": "Ichiran ramen dinner (Times Sq)",
+          "type": "food",
+          "place_ref": "ichiran",
           "groups": [
             1,
             2
           ]
         },
         {
-          "time": "11:00 PM",
-          "activity": "7 train back to LIC",
+          "time": "10:20 PM",
+          "activity": "Rockefeller Center",
+          "type": "sight",
+          "place_ref": "rockefeller",
+          "groups": [
+            1,
+            2
+          ]
+        },
+        {
+          "time": "10:45 PM",
+          "activity": "N/W back to LIC",
           "type": "transit",
           "groups": [
             1,
@@ -645,24 +625,6 @@
       "notes": "Plaza with Atlas & Prometheus statues. N/W to 49 St, 3 min walk.",
       "when": "Fri night (group)"
     },
-    "st_patricks": {
-      "name": "St. Patrick's Cathedral",
-      "category": "sight",
-      "address": "5th Ave, New York, NY 10022",
-      "lat": 40.7585,
-      "lng": -73.9759,
-      "notes": "Across 5th Ave from Rockefeller. Free, stunning interior.",
-      "when": "Fri night (group)"
-    },
-    "fifth_ave": {
-      "name": "5th Avenue",
-      "category": "sight",
-      "address": "5th Ave & E 50th St, New York, NY 10022",
-      "lat": 40.7596,
-      "lng": -73.975,
-      "notes": "Flagship stores, lights. Walk south toward Times Square.",
-      "when": "Fri night (group)"
-    },
     "gapstow": {
       "name": "Gapstow Bridge",
       "category": "sight",
@@ -694,16 +656,6 @@
       "notes": "Three neon-lit floors of M&M's right on Times Square, with Hershey's Chocolate World a block away. Free to wander, fun for first-timers, open late - grab candy if you want a souvenir.",
       "when": "Thu late night"
     },
-    "bryant_park": {
-      "name": "Bryant Park",
-      "category": "sight",
-      "address": "Bryant Park, New York, NY 10018",
-      "lat": 40.7536,
-      "lng": -73.9832,
-      "hours": "~7 AM - 10 PM (later in summer)",
-      "notes": "Leafy midtown oasis behind the NY Public Library (the famous stone lions out front). A nice breather on the walk down from 5th Ave toward Times Square.",
-      "when": "Fri night (group)"
-    },
     "grand_central": {
       "name": "Grand Central Terminal",
       "category": "sight",
@@ -715,37 +667,38 @@
       "notes": "Breathtaking Beaux-Arts main hall with the turquoise celestial ceiling. Free and open late. Bonus: the 7 train from here runs straight back to LIC (Court Sq).",
       "when": "Fri night (group)"
     },
-    "radio_city": {
-      "name": "Radio City Music Hall",
+    "wtc_memorial": {
+      "name": "9/11 Memorial pools",
       "category": "sight",
-      "address": "1260 6th Ave, New York, NY 10020",
-      "lat": 40.7599,
-      "lng": -73.9799,
-      "hours": "Exterior anytime; marquee lit at night",
-      "price": "Free (to see)",
-      "notes": "The legendary Art Deco theater, home of the Rockettes. The neon marquee on 6th Ave is a classic NYC photo - right next to Rockefeller, so it's your first stop.",
-      "when": "Fri night (group)"
-    },
-    "nypl_lions": {
-      "name": "NYPL Lions (Patience & Fortitude)",
-      "category": "sight",
-      "address": "476 5th Ave, New York, NY 10018",
-      "lat": 40.7532,
-      "lng": -73.9822,
-      "hours": "Steps & lions anytime (building closes evenings)",
+      "address": "180 Greenwich St, New York, NY 10007",
+      "lat": 40.7115,
+      "lng": -74.0125,
+      "hours": "~7:30 AM - 8:00 PM (free)",
       "price": "Free",
-      "notes": "The marble lions on the 5th Ave steps of the New York Public Library, lit up at night. Iconic photo - and Bryant Park is right behind the building.",
+      "notes": "The twin reflecting pools in the Twin Towers' footprints, names lit from within. Closes 8 PM - head straight here after summit. In June it's a serene dusk visit (not fully dark). Direct E from Court Sq to World Trade Center.",
       "when": "Fri night (group)"
     },
-    "chrysler": {
-      "name": "Chrysler Building",
+    "oculus": {
+      "name": "The Oculus (WTC)",
       "category": "sight",
-      "address": "405 Lexington Ave, New York, NY 10174",
-      "lat": 40.7516,
-      "lng": -73.9755,
-      "hours": "Exterior anytime; crown lit at night",
-      "price": "Free (to see)",
-      "notes": "The Art Deco crown lit up at night is the best skyscraper view in the city. One block east of Grand Central - the perfect last shot before the 7 train home.",
+      "address": "185 Greenwich St, New York, NY 10007",
+      "lat": 40.7117,
+      "lng": -74.0110,
+      "hours": "Open late (transit hub / mall)",
+      "price": "Free",
+      "notes": "The soaring white winged structure beside the Memorial - stunning lit up at night, and unlike the Memorial it stays open late. This is where you get the WTC-at-night beauty.",
+      "when": "Fri night (group)"
+    },
+    "levain_noho": {
+      "name": "Levain Bakery (NoHo)",
+      "category": "food",
+      "address": "340 Lafayette St, New York, NY 10012",
+      "lat": 40.7257,
+      "lng": -73.9952,
+      "hours": "7 AM - 11 PM",
+      "price": "$",
+      "order": "Chocolate chip walnut cookie (the hockey puck)",
+      "notes": "Levain's NoHo shop, open till 11 PM - about 5 min walk from the Prince St station. Grab the famous giant cookies on the way uptown.",
       "when": "Fri night (group)"
     }
   },
@@ -785,18 +738,18 @@
         2
       ]
     },
-    "melrose_to_rockefeller": {
-      "title": "Melrose Ballroom to Rockefeller Center",
+    "melrose_to_wtc": {
+      "title": "Melrose Ballroom to 9/11 Memorial (World Trade Center)",
       "when": "Fri night",
       "cost": "$3",
-      "duration": "~18 min",
+      "duration": "~30 min",
       "steps": [
-        "Walk to 39 Av-Dutch Kills station (N/W), ~5 min",
-        "N or W train toward Manhattan",
-        "Ride to 49 ST (~5 stops)",
-        "Walk 3 min east to Rockefeller Center / 5th Ave"
+        "Leave right at the 7 PM close - the Memorial shuts at 8 PM",
+        "Walk to Court Sq-23 St station",
+        "E train toward Manhattan (World Trade Center is the last stop)",
+        "Ride to WORLD TRADE CENTER (~25 min), the Memorial is right there"
       ],
-      "note": "Return: end the night at Grand Central and take the 7 train straight back to LIC (Court Sq).",
+      "note": "Go straight here first; everything else (Levain, Grand Central, Ichiran, Rockefeller) is north and stays open later. Return at the end: N/W from Times Square back to LIC.",
       "groups": [
         1,
         2
@@ -907,9 +860,18 @@
       ]
     },
     {
-      "sight": "Rockefeller Center + St. Patrick's",
+      "sight": "9/11 Memorial & The Oculus",
       "when": "Friday after 7 PM",
-      "note": "The plaza with Atlas & Prometheus, and St. Patrick's Cathedral across 5th Ave - free, stunning interior. All one easy walk.",
+      "note": "Go straight here after summit - the Memorial pools (free) close at 8 PM. The Oculus next door is free, open late, and stunning lit up at night.",
+      "groups": [
+        1,
+        2
+      ]
+    },
+    {
+      "sight": "Rockefeller Center",
+      "when": "Friday after 7 PM",
+      "note": "The plaza with the Atlas & Prometheus statues, beautiful lit up at night. Last stop before heading home.",
       "groups": [
         1,
         2
