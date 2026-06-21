@@ -17,8 +17,10 @@
         "from": "JFK Terminal 4",
         "to": "SJU",
         "depart": "7:25 PM",
-        "arrive": "11:43 PM",
-        "aircraft": "Airbus A321neo"
+        "arrive": "11:28 PM",
+        "aircraft": "Airbus A321neo",
+        "flight": "DL1859 (Delta)",
+        "gate": "T4, Gate B20"
       }
     },
     "hotels": [
@@ -441,41 +443,56 @@
     {
       "day": "Sunday",
       "date": "June 21",
-      "theme": "Light morning, JFK by 4:55 PM",
+      "theme": "Starbucks, bagels, Primark, then JFK",
       "group_present": false,
       "summit": [],
       "items": [
         {
-          "time": "10:00 AM",
-          "activity": "Levain Bakery UWS",
+          "time": "8:30 AM",
+          "activity": "Starbucks coffee",
           "type": "food",
-          "place_ref": "levain",
-          "route_ref": "levain_run",
+          "place_ref": "starbucks",
+          "groups": [
+            2
+          ]
+        },
+        {
+          "time": "9:15 AM",
+          "activity": "NYC bagels breakfast",
+          "type": "food",
+          "place_ref": "bagels",
+          "groups": [
+            2
+          ]
+        },
+        {
+          "time": "11:30 AM",
+          "activity": "Check out at TRYP by 12 PM (free; 1 PM = $17)",
+          "type": "hotel",
           "groups": [
             2
           ]
         },
         {
           "time": "12:00 PM",
-          "activity": "Ichiran Times Square",
-          "type": "food",
-          "place_ref": "ichiran",
+          "activity": "Primark Herald Square (shopping)",
+          "type": "sight",
+          "place_ref": "primark",
           "groups": [
             2
           ]
         },
         {
-          "time": "1:00 PM",
-          "activity": "Glace Rockefeller",
+          "time": "1:30 PM",
+          "activity": "Lunch / free time (bags held at TRYP)",
           "type": "food",
-          "place_ref": "glace",
           "groups": [
             2
           ]
         },
         {
-          "time": "1:45 PM",
-          "activity": "Pack up at TRYP",
+          "time": "3:00 PM",
+          "activity": "Grab bags from TRYP",
           "type": "hotel",
           "groups": [
             2
@@ -492,7 +509,7 @@
         },
         {
           "time": "4:55 PM",
-          "activity": "JFK Terminal 4",
+          "activity": "JFK Terminal 4 (Gate B20)",
           "type": "transit",
           "groups": [
             2
@@ -500,7 +517,7 @@
         },
         {
           "time": "7:25 PM",
-          "activity": "Flight to SJU",
+          "activity": "DL1859 to SJU",
           "type": "transit",
           "groups": [
             2
@@ -571,17 +588,34 @@
       "notes": "Tip the cutter cash for a taste. DON'T lose your ticket ($50).",
       "when": "Sat late dinner"
     },
-    "levain": {
-      "name": "Levain Bakery",
+    "starbucks": {
+      "name": "Starbucks (near TRYP)",
       "category": "food",
-      "address": "167 W 74th St, New York, NY 10023",
-      "lat": 40.7799,
-      "lng": -73.9803,
-      "hours": "Sun 8 AM - 8 PM",
+      "address": "1372 Broadway, New York, NY 10018",
+      "hours": "Opens ~6 AM",
       "price": "$",
-      "order": "Chocolate chip walnut cookie",
-      "notes": "Hockey-puck cookies. 1 train to 72 St. Grab extras for the flight.",
+      "order": "Coffee + a quick pastry",
+      "notes": "Grab-and-go coffee a couple blocks from TRYP to start the last day.",
       "when": "Sun morning"
+    },
+    "bagels": {
+      "name": "Best Bagel & Coffee",
+      "category": "food",
+      "address": "225 W 35th St, New York, NY 10001",
+      "hours": "~6 AM - 4 PM",
+      "price": "$",
+      "order": "Classic bagel with cream cheese (or bacon-egg-cheese)",
+      "notes": "Beloved no-frills NYC bagel spot near TRYP - hand-rolled, often a line but fast. The proper NYC bagel before you fly.",
+      "when": "Sun morning"
+    },
+    "primark": {
+      "name": "Primark Herald Square",
+      "category": "sight",
+      "address": "150 W 34th St, New York, NY 10001",
+      "hours": "Opens ~11 AM (confirm Sun hours)",
+      "price": "$ (cheap fashion)",
+      "notes": "Huge, ultra-affordable fashion flagship across from Herald Square - 2 blocks from TRYP. Great for cheap clothes and souvenirs. Opened May 2026; double-check the Sunday opening time.",
+      "when": "Sun midday"
     },
     "ichiran": {
       "name": "Ichiran Times Square",
@@ -589,23 +623,11 @@
       "address": "152 W 49th St, New York, NY 10019",
       "lat": 40.7609,
       "lng": -73.9841,
-      "hours": "Sun 10:30 AM - 10:30 PM",
+      "hours": "Open late (~till midnight)",
       "price": "$$",
       "order": "Tonkotsu ramen, customize on the order sheet",
-      "notes": "Solo-booth concept. 5 min from TRYP. ~$20-25/bowl.",
-      "when": "Sun lunch"
-    },
-    "glace": {
-      "name": "Glace Rockefeller Center",
-      "category": "food",
-      "address": "30 Rockefeller Plaza, New York, NY 10112",
-      "lat": 40.7587,
-      "lng": -73.9787,
-      "hours": "Check before going",
-      "price": "$",
-      "order": "Hot chocolate, toasted marshmallow cream",
-      "notes": "Viral spot. ~$10. Skip if line is 40+ min.",
-      "when": "Sun snack"
+      "notes": "Solo-booth ramen concept - order on the sheet at your booth. ~$20-25/bowl.",
+      "when": "Fri night (group)"
     },
     "times_square": {
       "name": "Times Square",
@@ -813,20 +835,6 @@
         "Walk 5 min to 79 Chrystie St (closes 7 PM, arrive by 6)",
         "Wah Fung to Katz's: walk 4 blocks to 205 E Houston St",
         "Katz's to TRYP: Uber (~$25) or F train 2 Av to 34 St-Herald Sq"
-      ],
-      "groups": [
-        2
-      ]
-    },
-    "levain_run": {
-      "title": "Sunday: Levain run (UWS)",
-      "when": "Sun morning",
-      "cost": "$3 each way",
-      "duration": "~20 min each way",
-      "steps": [
-        "TRYP to Levain: 1 train from Times Sq-42 St to 72 ST",
-        "Walk to 167 W 74th St",
-        "Return: 1 train 72 St to Times Sq-42 St, walk to Ichiran (W 49th)"
       ],
       "groups": [
         2

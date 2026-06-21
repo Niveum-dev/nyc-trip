@@ -103,7 +103,6 @@ const ROUTE_ORIGIN = {
   lic_to_jfk_group: NODES.lic,
   lic_to_tryp: NODES.lic,
   food_crawl: NODES.tryp,
-  levain_run: NODES.tryp,
   tryp_to_jfk: NODES.tryp,
 };
 
@@ -280,11 +279,15 @@ function renderOverview() {
         el('div', { class: 'tag' }, t('Arrival') + ' · ' + t(f.arrival.date || '')),
         el('div', { class: 'route' }, `${f.arrival.from} → ${f.arrival.to}`),
         el('div', { class: 'times' }, `${f.arrival.depart} – ${f.arrival.arrive}`),
+        f.arrival.flight && el('div', { class: 'times' }, '✈ ' + f.arrival.flight),
+        f.arrival.gate && el('div', { class: 'times' }, '🚪 ' + t(f.arrival.gate)),
         f.arrival.aircraft && el('div', { class: 'times' }, f.arrival.aircraft)),
       f.departure && el('div', { class: 'flight' },
         el('div', { class: 'tag' }, t('Departure') + ' · ' + t(f.departure.date || '')),
         el('div', { class: 'route' }, `${f.departure.from} → ${f.departure.to}`),
         el('div', { class: 'times' }, `${f.departure.depart} – ${f.departure.arrive}`),
+        f.departure.flight && el('div', { class: 'times' }, '✈ ' + f.departure.flight),
+        f.departure.gate && el('div', { class: 'times' }, '🚪 ' + t(f.departure.gate)),
         f.departure.aircraft && el('div', { class: 'times' }, f.departure.aircraft)))
   ));
 

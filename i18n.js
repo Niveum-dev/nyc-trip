@@ -322,4 +322,28 @@ window.I18N_ES = {
   '9/11 Memorial & The Oculus': 'Memorial del 11-S y The Oculus',
   'Go straight here after summit - the Memorial pools (free) close at 8 PM. The Oculus next door is free, open late, and stunning lit up at night.': 'Ven directo aquí tras la cumbre: las piletas del Memorial (gratis) cierran a las 8 PM. The Oculus al lado es gratis, abre hasta tarde y es espectacular iluminado de noche.',
   'The plaza with the Atlas & Prometheus statues, beautiful lit up at night. Last stop before heading home.': 'La plaza con las estatuas de Atlas y Prometeo, hermosa iluminada de noche. Última parada antes de volver.',
+
+  /* ---- Sunday rework: Starbucks / bagels / Primark + flight ---- */
+  'Starbucks, bagels, Primark, then JFK': 'Starbucks, bagels, Primark y luego JFK',
+  'Starbucks coffee': 'Café en Starbucks',
+  'NYC bagels breakfast': 'Desayuno de bagels de NYC',
+  'Check out at TRYP by 12 PM (free; 1 PM = $17)': 'Salida de TRYP antes de las 12 PM (gratis; 1 PM = $17)',
+  'Primark Herald Square (shopping)': 'Primark Herald Square (compras)',
+  'Lunch / free time (bags held at TRYP)': 'Almuerzo / tiempo libre (maletas en TRYP)',
+  'Grab bags from TRYP': 'Recoger maletas en TRYP',
+  'JFK Terminal 4 (Gate B20)': 'JFK Terminal 4 (Puerta B20)',
+  'DL1859 to SJU': 'DL1859 a SJU',
+  'Sun midday': 'Mediodía dom',
+  'T4, Gate B20': 'T4, Puerta B20',
+  /* hours / order */
+  'Opens ~6 AM': 'Abre ~6 AM',
+  'Coffee + a quick pastry': 'Café + un pan rápido',
+  'Classic bagel with cream cheese (or bacon-egg-cheese)': 'Bagel clásico con queso crema (o tocino-huevo-queso)',
+  'Opens ~11 AM (confirm Sun hours)': 'Abre ~11 AM (confirma horario dom)',
+  '$ (cheap fashion)': '$ (moda barata)',
+  /* place notes */
+  'Grab-and-go coffee a couple blocks from TRYP to start the last day.': 'Café para llevar a un par de cuadras de TRYP para empezar el último día.',
+  'Beloved no-frills NYC bagel spot near TRYP - hand-rolled, often a line but fast. The proper NYC bagel before you fly.': 'Querido local de bagels sin pretensiones cerca de TRYP, hechos a mano, suele haber fila pero es rápido. El bagel de NYC de verdad antes de volar.',
+  'Huge, ultra-affordable fashion flagship across from Herald Square - 2 blocks from TRYP. Great for cheap clothes and souvenirs. Opened May 2026; double-check the Sunday opening time.': 'Enorme tienda insignia de moda ultraeconómica frente a Herald Square, a 2 cuadras de TRYP. Ideal para ropa barata y souvenirs. Abrió en mayo de 2026; verifica el horario del domingo.',
+  'Solo-booth ramen concept - order on the sheet at your booth. ~$20-25/bowl.': 'Concepto de cabinas individuales de ramen: pide en la hoja de tu cabina. ~$20-25/tazón.',
 };
