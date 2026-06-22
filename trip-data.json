@@ -443,22 +443,13 @@
     {
       "day": "Sunday",
       "date": "June 21",
-      "theme": "Starbucks, bagels, Primark, then JFK",
+      "theme": "Bagels, Primark, Vessel, Central Park, 5th Ave, then JFK",
       "group_present": false,
       "summit": [],
       "items": [
         {
           "time": "8:30 AM",
-          "activity": "Starbucks coffee",
-          "type": "food",
-          "place_ref": "starbucks",
-          "groups": [
-            2
-          ]
-        },
-        {
-          "time": "9:15 AM",
-          "activity": "NYC bagels breakfast",
+          "activity": "Best Bagel & Coffee breakfast",
           "type": "food",
           "place_ref": "bagels",
           "groups": [
@@ -466,16 +457,8 @@
           ]
         },
         {
-          "time": "11:30 AM",
-          "activity": "Check out at TRYP by 12 PM (free; 1 PM = $17)",
-          "type": "hotel",
-          "groups": [
-            2
-          ]
-        },
-        {
-          "time": "12:00 PM",
-          "activity": "Primark Herald Square (shopping)",
+          "time": "9:45 AM",
+          "activity": "Primark Herald Square",
           "type": "sight",
           "place_ref": "primark",
           "groups": [
@@ -483,16 +466,44 @@
           ]
         },
         {
-          "time": "1:30 PM",
-          "activity": "Lunch / free time (bags held at TRYP)",
-          "type": "food",
+          "time": "11:00 AM",
+          "activity": "The Vessel (Hudson Yards)",
+          "type": "sight",
+          "place_ref": "vessel",
           "groups": [
             2
           ]
         },
         {
-          "time": "3:00 PM",
-          "activity": "Grab bags from TRYP",
+          "time": "12:00 PM",
+          "activity": "Central Park",
+          "type": "sight",
+          "place_ref": "central_park",
+          "groups": [
+            2
+          ]
+        },
+        {
+          "time": "1:15 PM",
+          "activity": "5th Avenue walk",
+          "type": "sight",
+          "place_ref": "fifth_ave",
+          "groups": [
+            2
+          ]
+        },
+        {
+          "time": "1:45 PM",
+          "activity": "Trump Tower",
+          "type": "sight",
+          "place_ref": "trump_tower",
+          "groups": [
+            2
+          ]
+        },
+        {
+          "time": "2:30 PM",
+          "activity": "Back to TRYP - grab bags & check out",
           "type": "hotel",
           "groups": [
             2
@@ -588,15 +599,41 @@
       "notes": "Tip the cutter cash for a taste. DON'T lose your ticket ($50).",
       "when": "Sat late dinner"
     },
-    "starbucks": {
-      "name": "Starbucks (near TRYP)",
-      "category": "food",
-      "address": "1372 Broadway, New York, NY 10018",
-      "hours": "Opens ~6 AM",
-      "price": "$",
-      "order": "Coffee + a quick pastry",
-      "notes": "Grab-and-go coffee a couple blocks from TRYP to start the last day.",
-      "when": "Sun morning"
+    "vessel": {
+      "name": "The Vessel (Hudson Yards)",
+      "category": "sight",
+      "address": "20 Hudson Yards, New York, NY 10001",
+      "lat": 40.7538,
+      "lng": -74.0019,
+      "notes": "The honeycomb climbable structure at Hudson Yards. 7 train to 34 St-Hudson Yards.",
+      "when": "Sun midday"
+    },
+    "central_park": {
+      "name": "Central Park",
+      "category": "sight",
+      "address": "Grand Army Plaza, 5th Ave & 59th St, New York, NY 10019",
+      "lat": 40.7644,
+      "lng": -73.9732,
+      "notes": "Entered at the southeast corner by Grand Army Plaza, then walked down 5th Ave.",
+      "when": "Sun midday"
+    },
+    "fifth_ave": {
+      "name": "5th Avenue",
+      "category": "sight",
+      "address": "5th Ave & E 57th St, New York, NY 10022",
+      "lat": 40.7636,
+      "lng": -73.9740,
+      "notes": "The flagship-store stretch of 5th Ave, walking south from Central Park toward Trump Tower.",
+      "when": "Sun midday"
+    },
+    "trump_tower": {
+      "name": "Trump Tower",
+      "category": "sight",
+      "address": "725 5th Ave, New York, NY 10022",
+      "lat": 40.7625,
+      "lng": -73.9740,
+      "notes": "725 5th Ave - the public atrium on 5th Avenue.",
+      "when": "Sun midday"
     },
     "bagels": {
       "name": "Best Bagel & Coffee",

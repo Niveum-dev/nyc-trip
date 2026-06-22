@@ -346,4 +346,17 @@ window.I18N_ES = {
   'Beloved no-frills NYC bagel spot near TRYP - hand-rolled, often a line but fast. The proper NYC bagel before you fly.': 'Querido local de bagels sin pretensiones cerca de TRYP, hechos a mano, suele haber fila pero es rápido. El bagel de NYC de verdad antes de volar.',
   'Huge, ultra-affordable fashion flagship across from Herald Square - 2 blocks from TRYP. Great for cheap clothes and souvenirs. Opened May 2026; double-check the Sunday opening time.': 'Enorme tienda insignia de moda ultraeconómica frente a Herald Square, a 2 cuadras de TRYP. Ideal para ropa barata y souvenirs. Abrió en mayo de 2026; verifica el horario del domingo.',
   'Solo-booth ramen concept - order on the sheet at your booth. ~$20-25/bowl.': 'Concepto de cabinas individuales de ramen: pide en la hoja de tu cabina. ~$20-25/tazón.',
+
+  /* ---- Sunday actual: Vessel / Central Park / 5th Ave / Trump Tower ---- */
+  'Bagels, Primark, Vessel, Central Park, 5th Ave, then JFK': 'Bagels, Primark, Vessel, Central Park, 5ta Avenida y luego JFK',
+  'Best Bagel & Coffee breakfast': 'Desayuno en Best Bagel & Coffee',
+  'The Vessel (Hudson Yards)': 'The Vessel (Hudson Yards)',
+  'Central Park': 'Central Park',
+  '5th Avenue walk': 'Caminata por la 5ta Avenida',
+  'Trump Tower': 'Trump Tower',
+  'Back to TRYP - grab bags & check out': 'De vuelta a TRYP - recoger maletas y salida',
+  'The honeycomb climbable structure at Hudson Yards. 7 train to 34 St-Hudson Yards.': 'La estructura tipo panal que se puede subir en Hudson Yards. Tren 7 hasta 34 St-Hudson Yards.',
+  'Entered at the southeast corner by Grand Army Plaza, then walked down 5th Ave.': 'Entraron por la esquina sureste junto a Grand Army Plaza y luego caminaron por la 5ta Avenida.',
+  'The flagship-store stretch of 5th Ave, walking south from Central Park toward Trump Tower.': 'El tramo de tiendas insignia de la 5ta Avenida, caminando al sur desde Central Park hacia Trump Tower.',
+  '725 5th Ave - the public atrium on 5th Avenue.': '725 5ta Avenida - el atrio público sobre la 5ta Avenida.',
 };
