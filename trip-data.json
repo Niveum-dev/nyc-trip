@@ -391,43 +391,43 @@
           ]
         },
         {
-          "time": "3:30 PM",
-          "activity": "H Mart Koreatown",
+          "time": "2:45 PM",
+          "activity": "Chinatown",
+          "type": "sight",
+          "place_ref": "chinatown",
+          "groups": [
+            2
+          ]
+        },
+        {
+          "time": "4:00 PM",
+          "activity": "Koreatown (K-Town)",
+          "type": "sight",
+          "place_ref": "koreatown",
+          "groups": [
+            2
+          ]
+        },
+        {
+          "time": "5:30 PM",
+          "activity": "Madison Square Garden",
+          "type": "sight",
+          "place_ref": "msg",
+          "groups": [
+            2
+          ]
+        },
+        {
+          "time": "6:30 PM",
+          "activity": "Ichiran ramen again (Times Sq)",
           "type": "food",
-          "place_ref": "hmart",
+          "place_ref": "ichiran",
           "groups": [
             2
           ]
         },
         {
-          "time": "4:30 PM",
-          "activity": "B/D to Chinatown",
-          "type": "transit",
-          "route_ref": "food_crawl",
-          "groups": [
-            2
-          ]
-        },
-        {
-          "time": "4:55 PM",
-          "activity": "Wah Fung No.1 (closes 7 PM, CASH)",
-          "type": "food",
-          "place_ref": "wah_fung",
-          "groups": [
-            2
-          ]
-        },
-        {
-          "time": "5:50 PM",
-          "activity": "Walk to Katz's",
-          "type": "food",
-          "place_ref": "katz",
-          "groups": [
-            2
-          ]
-        },
-        {
-          "time": "7:15 PM",
+          "time": "8:00 PM",
           "activity": "Back to TRYP",
           "type": "transit",
           "groups": [
@@ -563,41 +563,32 @@
       "notes": "Classic NYC slice in Times Square. $4-5. Cash or card.",
       "when": "Thu late night"
     },
-    "hmart": {
-      "name": "H Mart Koreatown",
-      "category": "food",
-      "address": "38 W 32nd St, New York, NY 10001",
-      "lat": 40.7479,
-      "lng": -73.9869,
-      "hours": "8 AM - 11 PM daily",
-      "price": "$",
-      "order": "Korean BBQ, bibimbap, tteokbokki, kimchi pancake",
-      "notes": "Food court upstairs. Pay each vendor separately. 5 min from TRYP.",
-      "when": "Sat early dinner"
+    "chinatown": {
+      "name": "Chinatown",
+      "category": "sight",
+      "address": "Chinatown, New York, NY 10013",
+      "lat": 40.7158,
+      "lng": -73.9970,
+      "notes": "Wandered Manhattan's Chinatown - markets, food stalls, and the buzz of Canal & Mott St.",
+      "when": "Sat afternoon"
     },
-    "wah_fung": {
-      "name": "Wah Fung No.1 Fast Food",
-      "category": "food",
-      "address": "79 Chrystie St, New York, NY 10002",
-      "lat": 40.7177,
-      "lng": -73.9931,
-      "hours": "Tue-Sun 9 AM - 7 PM (closed Mon)",
-      "price": "$",
-      "order": "Roast pork + duck over rice, $9.50",
-      "notes": "CASH ONLY. CLOSES 7 PM - arrive by 6. Near Grand St (B/D).",
-      "when": "Sat dinner"
+    "koreatown": {
+      "name": "Koreatown (K-Town)",
+      "category": "sight",
+      "address": "W 32nd St, New York, NY 10001",
+      "lat": 40.7475,
+      "lng": -73.9866,
+      "notes": "The Korean BBQ, dessert, and karaoke strip on W 32nd St - a couple blocks from TRYP.",
+      "when": "Sat afternoon"
     },
-    "katz": {
-      "name": "Katz's Delicatessen",
-      "category": "food",
-      "address": "205 E Houston St, New York, NY 10002",
-      "lat": 40.7223,
-      "lng": -73.9874,
-      "hours": "Sat 8 AM - 2:45 AM",
-      "price": "$$",
-      "order": "Pastrami on rye + mustard, pickles",
-      "notes": "Tip the cutter cash for a taste. DON'T lose your ticket ($50).",
-      "when": "Sat late dinner"
+    "msg": {
+      "name": "Madison Square Garden",
+      "category": "sight",
+      "address": "4 Pennsylvania Plaza, New York, NY 10001",
+      "lat": 40.7505,
+      "lng": -73.9934,
+      "notes": "The arena above Penn Station - a block from TRYP.",
+      "when": "Sat afternoon"
     },
     "vessel": {
       "name": "The Vessel (Hudson Yards)",
@@ -856,22 +847,6 @@
         "From hotel, walk to Court Sq-23 St (E) or Queensboro Plaza (7)",
         "E to Times Sq area, or 7 train to Times Sq-42 St",
         "Walk to TRYP by Wyndham (W 36th St area)"
-      ],
-      "groups": [
-        2
-      ]
-    },
-    "food_crawl": {
-      "title": "Food crawl: TRYP to H Mart to Wah Fung to Katz's",
-      "when": "Sat evening",
-      "cost": "$3 subway",
-      "duration": "varies",
-      "steps": [
-        "TRYP to H Mart: walk 5 min to 38 W 32nd St",
-        "H Mart to Wah Fung: B/D from 34 St-Herald Sq to GRAND ST (~6 stops)",
-        "Walk 5 min to 79 Chrystie St (closes 7 PM, arrive by 6)",
-        "Wah Fung to Katz's: walk 4 blocks to 205 E Houston St",
-        "Katz's to TRYP: Uber (~$25) or F train 2 Av to 34 St-Herald Sq"
       ],
       "groups": [
         2

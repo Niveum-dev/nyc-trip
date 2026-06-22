@@ -359,4 +359,11 @@ window.I18N_ES = {
   'Entered at the southeast corner by Grand Army Plaza, then walked down 5th Ave.': 'Entraron por la esquina sureste junto a Grand Army Plaza y luego caminaron por la 5ta Avenida.',
   'The flagship-store stretch of 5th Ave, walking south from Central Park toward Trump Tower.': 'El tramo de tiendas insignia de la 5ta Avenida, caminando al sur desde Central Park hacia Trump Tower.',
   '725 5th Ave - the public atrium on 5th Avenue.': '725 5ta Avenida - el atrio público sobre la 5ta Avenida.',
+
+  /* ---- Saturday actual: Chinatown / Koreatown / MSG / Ichiran ---- */
+  'Ichiran ramen again (Times Sq)': 'Ramen en Ichiran otra vez (Times Sq)',
+  'Back to TRYP': 'De vuelta a TRYP',
+  "Wandered Manhattan's Chinatown - markets, food stalls, and the buzz of Canal & Mott St.": 'Recorrieron el Chinatown de Manhattan: mercados, puestos de comida y el bullicio de Canal y Mott St.',
+  'The Korean BBQ, dessert, and karaoke strip on W 32nd St - a couple blocks from TRYP.': 'La franja de BBQ coreano, postres y karaoke en la calle 32 Oeste, a un par de cuadras de TRYP.',
+  'The arena above Penn Station - a block from TRYP.': 'La arena sobre Penn Station, a una cuadra de TRYP.',
 };

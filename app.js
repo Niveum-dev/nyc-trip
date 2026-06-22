@@ -102,7 +102,6 @@ const ROUTE_ORIGIN = {
   melrose_to_gapstow: NODES.melrose,
   lic_to_jfk_group: NODES.lic,
   lic_to_tryp: NODES.lic,
-  food_crawl: NODES.tryp,
   tryp_to_jfk: NODES.tryp,
 };
 
