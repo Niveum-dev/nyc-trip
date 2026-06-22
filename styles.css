@@ -441,6 +441,16 @@ main {
 }
 .hl-card h3 { margin: 2px 0 2px; }
 
+/* ---------- Scorecard ---------- */
+#scorecard { padding-top: 22px; }
+.scorecard-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+
 /* ---------- Bottom nav ---------- */
 .bottomnav {
   position: fixed;
